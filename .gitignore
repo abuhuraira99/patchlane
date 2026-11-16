@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.scratch/
+.wrangler/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+# design-run artefacts
+.taste-skill/chrome-*/
+.impeccable/review/
+.impeccable/mocks/
+shots/
+# the CLI bundle is committed on purpose (the GitHub Action runs it): keep cli/dist/
+.taste-skill/chrome-check/
+.taste-skill/gate/

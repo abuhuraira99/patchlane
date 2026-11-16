@@ -1,0 +1,17 @@
+[
+ {
+  "check": "scroll-reveal",
+  "target": "div.ci-diagram > div.dg",
+  "reason": "kit diagram (assets/diagrams): held still with data-dg-still, it draws at rest; its IntersectionObserver only pauses it off screen, so nothing reveals on scroll"
+ },
+ {
+  "check": "off-grid",
+  "target": "div.span-4.stack-4 > a.nav__logo",
+  "reason": "kit footer logo: the dealt initial mark sits on the page margin and the name follows it, exactly as in the nav; the check reads the name, not the mark"
+ },
+ {
+  "check": "cut-text",
+  "target": "div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap",
+  "reason": "kit diagram on a phone: the lanes turn vertical and each caption is centred under its 36px tile, wider than the tile by design; no glyph is clipped"
+ }
+]

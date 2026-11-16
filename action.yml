@@ -1,0 +1,58 @@
+name: Patchlane API check
+description: Check an OpenAPI spec, tokens and AI agent tool lists for OWASP API Top 10 risks, and write SARIF for code scanning.
+author: Abu Huraira
+branding:
+  icon: shield
+  color: gray-dark
+
+inputs:
+  spec:
+    description: Path to the OpenAPI 3.x or Swagger 2.0 file (JSON or YAML).
+    required: true
+    default: openapi.yaml
+  previous:
+    description: Path to the previous release of the spec. Adds the release check (security regressions and semver). Skipped when the file is missing.
+    required: false
+    default: ''
+  tools:
+    description: Path to an MCP tools/list result or an OpenAI / Anthropic tools array.
+    required: false
+    default: ''
+  fail-on:
+    description: Fail the step on a finding at this level or worse (critical, high, medium, low, info, none).
+    required: false
+    default: high
+  sarif:
+    description: Where to write the SARIF 2.1.0 file.
+    required: false
+    default: patchlane.sarif
+  report:
+    description: Where to write the Markdown report (also added to the job summary).
+    required: false
+    default: ''
+  framework:
+    description: Add fix code to the report for express, fastapi, django, laravel or spring.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Run Patchlane
+      shell: bash
+      env:
+        PL_SPEC: ${{ inputs.spec }}
+        PL_PREVIOUS: ${{ inputs.previous }}
+        PL_TOOLS: ${{ inputs.tools }}
+        PL_FAIL_ON: ${{ inputs.fail-on }}
+        PL_SARIF: ${{ inputs.sarif }}
+        PL_REPORT: ${{ inputs.report }}
+        PL_FRAMEWORK: ${{ inputs.framework }}
+      run: |
+        args=(check "$PL_SPEC" --fail-on "$PL_FAIL_ON")
+        [ -n "$PL_PREVIOUS" ] && args+=(--previous "$PL_PREVIOUS")
+        [ -n "$PL_TOOLS" ] && args+=(--tools "$PL_TOOLS")
+        [ -n "$PL_SARIF" ] && args+=(--sarif "$PL_SARIF")
+        [ -n "$PL_REPORT" ] && args+=(--report "$PL_REPORT")
+        [ -n "$PL_FRAMEWORK" ] && args+=(--framework "$PL_FRAMEWORK")
+        node "$GITHUB_ACTION_PATH/cli/dist/patchlane.mjs" "${args[@]}"

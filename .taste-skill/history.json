@@ -1,0 +1,20 @@
+{
+  "palettes": [
+    "lunar-grey-bronze"
+  ],
+  "types": [
+    "instrument"
+  ],
+  "dealt": [
+    "instrument",
+    "manrope",
+    "geist"
+  ],
+  "moments": [
+    {
+      "id": "counter-rolls",
+      "at": "2026-11-15T23:05:41.893Z",
+      "seed": "da12350d"
+    }
+  ]
+}

@@ -1,0 +1,822 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T02:04:58.806Z",
+  "title": "Design System: Patchlane",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Patina Bronze",
+        "canonical": "#a08672",
+        "tonalRamp": [
+          "oklch(15% 0.007 59.5)",
+          "oklch(26% 0.023 59.5)",
+          "oklch(37% 0.035 59.5)",
+          "oklch(48% 0.042 59.5)",
+          "oklch(59% 0.043 59.5)",
+          "oklch(70% 0.037 59.5)",
+          "oklch(82% 0.025 59.5)",
+          "oklch(95% 0.007 59.5)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Bronze Ink (Graphite)",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "accent-hi": {
+        "role": "primary",
+        "displayName": "Lit Bronze",
+        "canonical": "#b9a08b",
+        "tonalRamp": [
+          "oklch(15% 0.007 62.1)",
+          "oklch(26% 0.022 62.1)",
+          "oklch(37% 0.034 62.1)",
+          "oklch(48% 0.041 62.1)",
+          "oklch(59% 0.041 62.1)",
+          "oklch(70% 0.036 62.1)",
+          "oklch(82% 0.025 62.1)",
+          "oklch(95% 0.007 62.1)"
+        ]
+      },
+      "accent-wash": {
+        "role": "primary",
+        "displayName": "Bronze Wash",
+        "canonical": "rgba(160, 134, 114, 0.14)",
+        "tonalRamp": [
+          "oklch(15% 0.007 59.5)",
+          "oklch(26% 0.023 59.5)",
+          "oklch(37% 0.035 59.5)",
+          "oklch(48% 0.042 59.5)",
+          "oklch(59% 0.043 59.5)",
+          "oklch(70% 0.037 59.5)",
+          "oklch(82% 0.025 59.5)",
+          "oklch(95% 0.007 59.5)"
+        ]
+      },
+      "sev-critical": {
+        "role": "severity",
+        "displayName": "Signal Coral (critical)",
+        "canonical": "#f07070",
+        "tonalRamp": [
+          "oklch(15% 0.028 22.0)",
+          "oklch(26% 0.084 22.0)",
+          "oklch(37% 0.128 22.0)",
+          "oklch(48% 0.154 22.0)",
+          "oklch(59% 0.157 22.0)",
+          "oklch(70% 0.137 22.0)",
+          "oklch(82% 0.093 22.0)",
+          "oklch(95% 0.028 22.0)"
+        ]
+      },
+      "sev-high": {
+        "role": "severity",
+        "displayName": "Ember (high)",
+        "canonical": "#ec9055",
+        "tonalRamp": [
+          "oklch(15% 0.023 51.9)",
+          "oklch(26% 0.071 51.9)",
+          "oklch(37% 0.109 51.9)",
+          "oklch(48% 0.130 51.9)",
+          "oklch(59% 0.133 51.9)",
+          "oklch(70% 0.116 51.9)",
+          "oklch(82% 0.079 51.9)",
+          "oklch(95% 0.023 51.9)"
+        ]
+      },
+      "sev-medium": {
+        "role": "severity",
+        "displayName": "Brass (medium)",
+        "canonical": "#d8b763",
+        "tonalRamp": [
+          "oklch(15% 0.019 88.3)",
+          "oklch(26% 0.058 88.3)",
+          "oklch(37% 0.089 88.3)",
+          "oklch(48% 0.107 88.3)",
+          "oklch(59% 0.109 88.3)",
+          "oklch(70% 0.095 88.3)",
+          "oklch(82% 0.065 88.3)",
+          "oklch(95% 0.019 88.3)"
+        ]
+      },
+      "sev-low": {
+        "role": "severity",
+        "displayName": "Steel Blue (low)",
+        "canonical": "#93b2d2",
+        "tonalRamp": [
+          "oklch(15% 0.010 249.4)",
+          "oklch(26% 0.030 249.4)",
+          "oklch(37% 0.046 249.4)",
+          "oklch(48% 0.056 249.4)",
+          "oklch(59% 0.057 249.4)",
+          "oklch(70% 0.050 249.4)",
+          "oklch(82% 0.034 249.4)",
+          "oklch(95% 0.010 249.4)"
+        ]
+      },
+      "sev-info": {
+        "role": "severity",
+        "displayName": "Neutral Grey (info)",
+        "canonical": "#a0a0a0",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Graphite Ground",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "pane": {
+        "role": "neutral",
+        "displayName": "Pane Graphite",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "well": {
+        "role": "neutral",
+        "displayName": "Inkwell",
+        "canonical": "#0c0c0c",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Graphite",
+        "canonical": "#1c1c1c",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "selected": {
+        "role": "neutral",
+        "displayName": "Selected Graphite",
+        "canonical": "#212121",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "window": {
+        "role": "neutral",
+        "displayName": "Product Window",
+        "canonical": "#151515",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#f2f2f2",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Soft Chalk",
+        "canonical": "#cfcfcf",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "#8f8f8f",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "canonical": "#7d7d7d",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(242, 242, 242, 0.08)",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "rgba(242, 242, 242, 0.14)",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "inverse-bg": {
+        "role": "neutral",
+        "displayName": "Chalk Band",
+        "canonical": "#f2f2f2",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "inverse-ink": {
+        "role": "neutral",
+        "displayName": "Chalk Band Ink",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "inverse-muted": {
+        "role": "neutral",
+        "displayName": "Chalk Band Muted",
+        "canonical": "#5c5c5c",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "ground-sand": {
+        "role": "neutral",
+        "displayName": "Sand Ground",
+        "canonical": "#d9ccb7",
+        "tonalRamp": [
+          "oklch(15% 0.006 79.9)",
+          "oklch(26% 0.017 79.9)",
+          "oklch(37% 0.026 79.9)",
+          "oklch(48% 0.031 79.9)",
+          "oklch(59% 0.032 79.9)",
+          "oklch(70% 0.028 79.9)",
+          "oklch(82% 0.019 79.9)",
+          "oklch(95% 0.006 79.9)"
+        ]
+      },
+      "syntax-keyword": {
+        "role": "syntax",
+        "displayName": "Keyword",
+        "canonical": "#d1ad8f",
+        "tonalRamp": [
+          "oklch(15% 0.010 61.6)",
+          "oklch(26% 0.031 61.6)",
+          "oklch(37% 0.048 61.6)",
+          "oklch(48% 0.057 61.6)",
+          "oklch(59% 0.058 61.6)",
+          "oklch(70% 0.051 61.6)",
+          "oklch(82% 0.035 61.6)",
+          "oklch(95% 0.010 61.6)"
+        ]
+      },
+      "syntax-string": {
+        "role": "syntax",
+        "displayName": "String",
+        "canonical": "#a9c39f",
+        "tonalRamp": [
+          "oklch(15% 0.010 137.0)",
+          "oklch(26% 0.030 137.0)",
+          "oklch(37% 0.046 137.0)",
+          "oklch(48% 0.056 137.0)",
+          "oklch(59% 0.057 137.0)",
+          "oklch(70% 0.050 137.0)",
+          "oklch(82% 0.034 137.0)",
+          "oklch(95% 0.010 137.0)"
+        ]
+      },
+      "syntax-number": {
+        "role": "syntax",
+        "displayName": "Number",
+        "canonical": "#dcbc72",
+        "tonalRamp": [
+          "oklch(15% 0.017 86.8)",
+          "oklch(26% 0.053 86.8)",
+          "oklch(37% 0.081 86.8)",
+          "oklch(48% 0.097 86.8)",
+          "oklch(59% 0.099 86.8)",
+          "oklch(70% 0.087 86.8)",
+          "oklch(82% 0.059 86.8)",
+          "oklch(95% 0.017 86.8)"
+        ]
+      },
+      "syntax-comment": {
+        "role": "syntax",
+        "displayName": "Comment",
+        "canonical": "#8c8c8c",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      },
+      "syntax-decorator": {
+        "role": "syntax",
+        "displayName": "Decorator",
+        "canonical": "#93b2d2",
+        "tonalRamp": [
+          "oklch(15% 0.010 249.4)",
+          "oklch(26% 0.030 249.4)",
+          "oklch(37% 0.046 249.4)",
+          "oklch(48% 0.056 249.4)",
+          "oklch(59% 0.057 249.4)",
+          "oklch(70% 0.050 249.4)",
+          "oklch(82% 0.034 249.4)",
+          "oklch(95% 0.010 249.4)"
+        ]
+      },
+      "syntax-property": {
+        "role": "syntax",
+        "displayName": "Property",
+        "canonical": "#e6e6e6",
+        "tonalRamp": [
+          "oklch(15% 0.000 0.0)",
+          "oklch(26% 0.000 0.0)",
+          "oklch(37% 0.000 0.0)",
+          "oklch(48% 0.000 0.0)",
+          "oklch(59% 0.000 0.0)",
+          "oklch(70% 0.000 0.0)",
+          "oklch(82% 0.000 0.0)",
+          "oklch(95% 0.000 0.0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The landing hero h1 only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing section h2s."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "The open finding in the detail pane; 22px on phones."
+      },
+      "stat": {
+        "displayName": "Statistic",
+        "purpose": "The four figures that roll once; a step under the h2."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Section intros; 20px from 1024px."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Landing paragraphs and FAQ answers."
+      },
+      "body-app": {
+        "displayName": "Body (app)",
+        "purpose": "App and rules catalogue chrome."
+      },
+      "body-reading": {
+        "displayName": "Reading",
+        "purpose": "Explanations in the detail pane and rule text, in Soft Chalk."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, chips, pills, segmented items, footer and menu headings."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Code, paths, rule ids, evidence, versions, counts and scores."
+      }
+    },
+    "shadows": [
+      {
+        "name": "menu",
+        "value": "0 16px 40px -12px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.4)",
+        "purpose": "The Export menu."
+      },
+      {
+        "name": "sheet",
+        "value": "-24px 0 48px -16px rgba(0,0,0,0.7)",
+        "purpose": "The detail sheet sliding over the findings (760-1199px)."
+      },
+      {
+        "name": "segment",
+        "value": "0 1px 2px rgba(0,0,0,0.4)",
+        "purpose": "The selected framework segment."
+      },
+      {
+        "name": "product-window",
+        "value": "0 0 0 1px rgba(255,255,255,0.07), 0 40px 80px -36px rgba(0,0,0,0.85), 0 12px 24px -12px rgba(0,0,0,0.5)",
+        "purpose": "Illustrated app windows on the landing."
+      },
+      {
+        "name": "floating-note",
+        "value": "0 24px 48px -20px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.25)",
+        "purpose": "Chalk note cards laid over a window."
+      },
+      {
+        "name": "critical-halo",
+        "value": "0 0 0 3px rgba(240,112,112,0.16)",
+        "purpose": "The critical severity dot only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-kit",
+        "value": "cubic-bezier(.2, .8, .2, 1)",
+        "purpose": "Landing UI ease-out (kit --ease / --m-ease)."
+      },
+      {
+        "name": "ease-app",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "App ease; also the kit entrance ease (--m-ease-enter)."
+      },
+      {
+        "name": "ease-indicator",
+        "value": "cubic-bezier(.65, 0, .35, 1)",
+        "purpose": "The landing tab indicator travelling between tabs."
+      },
+      {
+        "name": "hover-in",
+        "value": "150ms",
+        "purpose": "Landing hover in: buttons, links, nav, tabs."
+      },
+      {
+        "name": "hover-out",
+        "value": "120ms",
+        "purpose": "Landing hover out."
+      },
+      {
+        "name": "press",
+        "value": "90ms",
+        "purpose": "Landing press (1px down, scale .985). The app press is 120ms, 1px down."
+      },
+      {
+        "name": "menu-open",
+        "value": "200ms",
+        "purpose": "Landing mega menu, after 150ms of hover intent."
+      },
+      {
+        "name": "tab-indicator",
+        "value": "240ms",
+        "purpose": "Landing section-tab indicator slide."
+      },
+      {
+        "name": "app-colour",
+        "value": "160-180ms",
+        "purpose": "App colour and border changes."
+      },
+      {
+        "name": "desk-tab-underline",
+        "value": "280ms",
+        "purpose": "The app desk tab underline scaling in."
+      },
+      {
+        "name": "detail-sheet",
+        "value": "380ms",
+        "purpose": "The detail sheet sliding in at 760-1199px."
+      },
+      {
+        "name": "hero-entrance",
+        "value": "~1100ms",
+        "purpose": "Once on load: h1 word by word, art settling from 98% scale."
+      },
+      {
+        "name": "counter-roll",
+        "value": "1400ms, 90ms stagger",
+        "purpose": "The four figures roll once when their row first appears."
+      },
+      {
+        "name": "button-lift",
+        "value": "translateY(-1px)",
+        "purpose": "Landing button hover on fine pointers; none under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "kit-phone",
+        "value": "639px",
+        "purpose": "Landing phone layout below 640px."
+      },
+      {
+        "name": "kit-tablet",
+        "value": "640px"
+      },
+      {
+        "name": "kit-desktop",
+        "value": "1024px"
+      },
+      {
+        "name": "kit-wide",
+        "value": "1280px"
+      },
+      {
+        "name": "app-narrow",
+        "value": "380px",
+        "purpose": "Wordmark hides, tile stays."
+      },
+      {
+        "name": "app-phone",
+        "value": "759px",
+        "purpose": "One column with the Inputs/Findings switch."
+      },
+      {
+        "name": "app-desk",
+        "value": "1200px",
+        "purpose": "Three desks at and above; detail becomes a sheet below."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one bronze action per view. 44px on the landing and on touch; 38px (button-primary-compact) in the app chrome.",
+      "html": "<div class=\"ds-g-btn-primary\"><button class=\"ds-btn-primary\" type=\"button\">Start a check-up</button></div>",
+      "css": ".ds-g-btn-primary { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 24px; border: 1px solid transparent; border-radius: 4px; background: var(--accent, #a08672); color: #111111; font: 500 16px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.22, 1, 0.36, 1), transform 90ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background: #b9a08b; transform: translateY(-1px); } .ds-btn-primary:active { transform: translateY(1px) scale(0.985); } .ds-btn-primary:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary, .ds-btn-primary:hover, .ds-btn-primary:active { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion to the primary: transparent, Strong Hairline border, Chalk text.",
+      "html": "<div class=\"ds-g-btn-secondary\"><button class=\"ds-btn-secondary\" type=\"button\">See the sample report</button></div>",
+      "css": ".ds-g-btn-secondary { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 24px; border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 4px; background: transparent; color: #f2f2f2; font: 500 16px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.22, 1, 0.36, 1), border-color 150ms cubic-bezier(0.22, 1, 0.36, 1), transform 90ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-secondary:hover { background: #1c1c1c; border-color: rgba(242, 242, 242, 0.3); transform: translateY(-1px); } .ds-btn-secondary:active { transform: translateY(1px) scale(0.985); } .ds-btn-secondary:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-secondary, .ds-btn-secondary:hover, .ds-btn-secondary:active { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "App tool button: a 14px line icon and a short verb. Shows \"Copied\" in Lit Bronze after a copy.",
+      "html": "<div class=\"ds-g-btn-ghost\"><button class=\"ds-btn-ghost\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.5 5.5h7v7h-7z\"/><path d=\"M3.5 10.5v-7h7\"/></svg><span>Copy code</span></button> <button class=\"ds-btn-ghost is-done\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.5 5.5h7v7h-7z\"/><path d=\"M3.5 10.5v-7h7\"/></svg><span>Copied</span></button></div>",
+      "css": ".ds-g-btn-ghost { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-btn-ghost { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px; border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 4px; background: transparent; color: #cfcfcf; font: 500 13px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-ghost:hover { color: #f2f2f2; border-color: rgba(242, 242, 242, 0.28); background: #1c1c1c; } .ds-btn-ghost:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; } .ds-btn-ghost.is-done { color: #b9a08b; } .ds-btn-ghost:disabled { opacity: 0.45; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-btn-ghost { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Inkwell field with a Strong Hairline border; the border turns bronze on focus.",
+      "html": "<div class=\"ds-g-input\"><label class=\"ds-input-label\" for=\"ds-origin\">Origin sent with the request</label><input class=\"ds-input\" id=\"ds-origin\" type=\"text\" placeholder=\"https://unknown.example\"></div>",
+      "css": ".ds-g-input { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-g-input { display: grid; gap: 6px; } .ds-input-label { color: #cfcfcf; font: 500 13px/1.4 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-input { height: 38px; padding: 0 12px; background: var(--well, #0c0c0c); border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 4px; color: #f2f2f2; font: 400 14px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; outline: none; transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-input::placeholder { color: #7d7d7d; opacity: 1; } .ds-input:hover { border-color: rgba(242, 242, 242, 0.24); } .ds-input:focus, .ds-input:focus-visible { border-color: #a08672; } @media (prefers-reduced-motion: reduce) { .ds-input { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Code Input",
+      "kind": "custom",
+      "refersTo": "code-input",
+      "description": "Signature input: line-number gutter, mono textarea, bronze caret and focus border, status line under it.",
+      "html": "<div class=\"ds-g-code\"><div class=\"ds-code-head\"><span class=\"ds-code-label\">OpenAPI or Swagger spec</span><span class=\"ds-code-tool\"><svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 1.75h5l3 3v9.5H4z\"/><path d=\"M9 1.75v3h3\"/></svg>Open a file</span></div><div class=\"ds-code\"><div class=\"ds-code-gutter\" aria-hidden=\"true\">1\n2\n3\n4\n5</div><textarea class=\"ds-code-area\" rows=\"5\" spellcheck=\"false\" aria-label=\"Spec\">openapi: 3.0.3\ninfo:\n  title: Larkspur Lending API\n  version: 2.4.0\npaths: …</textarea></div><p class=\"ds-code-status\">Larkspur Lending API 2.4.0 · 9 operations · OpenAPI 3.0.3</p></div>",
+      "css": ".ds-g-code { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-g-code { display: grid; gap: 8px; } .ds-code-head { display: flex; align-items: center; justify-content: space-between; min-height: 30px; } .ds-code-label { color: #cfcfcf; font: 500 13px/1.4 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-code-tool { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 9px; color: #cfcfcf; font: 500 13px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-code { display: grid; grid-template-columns: auto minmax(0, 1fr); background: var(--well, #0c0c0c); border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 6px; overflow: hidden; transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-code:hover { border-color: rgba(242, 242, 242, 0.22); } .ds-code:focus-within { border-color: #a08672; } .ds-code-gutter { padding: 12px 10px 12px 12px; min-width: 40px; border-right: 1px solid rgba(242, 242, 242, 0.08); color: #7d7d7d; font: 400 12.5px/20px \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; text-align: right; white-space: pre; user-select: none; } .ds-code-area { display: block; width: 100%; margin: 0; padding: 12px 14px; background: transparent; border: 0; outline: none; color: #f2f2f2; font: 400 12.5px/20px \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; white-space: pre; resize: vertical; caret-color: #a08672; } .ds-code-status { margin: 0; color: #cfcfcf; font: 400 13px/20px \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; } .ds-code-status::before { content: \"\"; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: #a08672; vertical-align: 2px; } @media (prefers-reduced-motion: reduce) { .ds-code { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Desk Tabs",
+      "kind": "nav",
+      "refersTo": "desk-tab",
+      "description": "App navigation between the input desks: Ash labels, Chalk when selected, a 2px bronze underline and a mono count badge.",
+      "html": "<div class=\"ds-g-tabs\"><div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Inputs\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\" type=\"button\">Spec<span class=\"ds-tab-count\">36</span></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" type=\"button\">Server<span class=\"ds-tab-count\">9</span></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" type=\"button\">Token<span class=\"ds-tab-count\">6</span></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" type=\"button\">CI</button></div></div>",
+      "css": ".ds-g-tabs { background: var(--pane, #141414); padding: 10px 6px 0; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-tabs { display: flex; border-bottom: 1px solid rgba(242, 242, 242, 0.08); } .ds-tab { position: relative; display: inline-flex; align-items: center; gap: 5px; height: 40px; padding: 0 8px; border: 0; background: transparent; color: #8f8f8f; font: 500 14px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-tab::after { content: \"\"; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px; background: #a08672; transform: scaleX(0); transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-tab:hover { color: #cfcfcf; } .ds-tab[aria-selected=\"true\"] { color: #f2f2f2; } .ds-tab[aria-selected=\"true\"]::after { transform: scaleX(1); } .ds-tab:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; border-radius: 4px; } .ds-tab-count { min-width: 18px; padding: 0 5px; border-radius: 10px; background: #212121; color: #cfcfcf; font: 500 12px/20px \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; text-align: center; } @media (prefers-reduced-motion: reduce) { .ds-tab, .ds-tab::after { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Severity Chips",
+      "kind": "chip",
+      "refersTo": "chip-severity",
+      "description": "Filter chips: square severity dot, the word, a mono count. Pressed fills Bronze Wash with a bronze border.",
+      "html": "<div class=\"ds-g-chips\"><div class=\"ds-chips\" role=\"group\" aria-label=\"Filter by severity\"><button class=\"ds-chip\" type=\"button\" aria-pressed=\"true\"><i class=\"ds-dot ds-dot--critical\"></i>Critical<span class=\"ds-chip-n\">1</span></button><button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\"><i class=\"ds-dot ds-dot--high\"></i>High<span class=\"ds-chip-n\">14</span></button><button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\"><i class=\"ds-dot ds-dot--medium\"></i>Medium<span class=\"ds-chip-n\">11</span></button><button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\"><i class=\"ds-dot ds-dot--low\"></i>Low<span class=\"ds-chip-n\">8</span></button><button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\" disabled><i class=\"ds-dot\"></i>Info<span class=\"ds-chip-n\">0</span></button></div></div>",
+      "css": ".ds-g-chips { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-chips { display: flex; flex-wrap: wrap; gap: 6px; } .ds-chip { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 11px; border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 4px; background: transparent; color: #cfcfcf; font: 500 13px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1), border-color 160ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-chip:hover:not(:disabled) { border-color: rgba(242, 242, 242, 0.3); color: #f2f2f2; } .ds-chip[aria-pressed=\"true\"] { background: rgba(160, 134, 114, 0.14); border-color: #a08672; color: #f2f2f2; } .ds-chip:disabled { opacity: 0.4; cursor: not-allowed; } .ds-chip:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; } .ds-chip-n { color: #8f8f8f; font: 500 12.5px/1 \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; } .ds-chip[aria-pressed=\"true\"] .ds-chip-n { color: #cfcfcf; } .ds-dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 2px; background: #a0a0a0; } .ds-dot--critical { background: #f07070; box-shadow: 0 0 0 3px rgba(240, 112, 112, 0.16); } .ds-dot--high { background: #ec9055; } .ds-dot--medium { background: #d8b763; } .ds-dot--low { background: #93b2d2; }"
+    },
+    {
+      "name": "Findings List Row",
+      "kind": "custom",
+      "refersTo": "finding-row",
+      "description": "One finding: dot, plain-sentence title over a mono location, severity word over the rule id. Hover Raised Graphite, selected Selected Graphite.",
+      "html": "<div class=\"ds-g-rows\"><ul class=\"ds-rows\" role=\"listbox\" aria-label=\"Findings\"><li class=\"ds-row\" role=\"option\" aria-selected=\"true\"><i class=\"ds-rdot ds-rdot--critical\"></i><span class=\"ds-row-main\"><span class=\"ds-row-title\">The caller picks which object to act on</span><span class=\"ds-row-where\">GET /v1/loans/{loanId}</span></span><span class=\"ds-row-meta\"><span class=\"ds-row-sev\">Critical</span><span class=\"ds-row-rule\">API1-OWNERSHIP</span></span></li><li class=\"ds-row\" role=\"option\" aria-selected=\"false\"><i class=\"ds-rdot ds-rdot--high\"></i><span class=\"ds-row-main\"><span class=\"ds-row-title\">The response carries secrets or regulated data</span><span class=\"ds-row-where\">GET /v2/loans/{loanId} · borrower.ssn</span></span><span class=\"ds-row-meta\"><span class=\"ds-row-sev\">High</span><span class=\"ds-row-rule\">API3-SENSITIVE-OUT</span></span></li><li class=\"ds-row\" role=\"option\" aria-selected=\"false\"><i class=\"ds-rdot ds-rdot--medium\"></i><span class=\"ds-row-main\"><span class=\"ds-row-title\">The page size has no maximum</span><span class=\"ds-row-where\">GET /v2/loans · limit</span></span><span class=\"ds-row-meta\"><span class=\"ds-row-sev\">Medium</span><span class=\"ds-row-rule\">API4-NO-MAX</span></span></li></ul></div>",
+      "css": ".ds-g-rows { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-rows { margin: 0; padding: 0 12px; list-style: none; } .ds-row { display: grid; grid-template-columns: 8px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 13px 12px; margin: 0 -12px; border-radius: 6px; cursor: pointer; transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-row + .ds-row { box-shadow: inset 0 1px 0 rgba(242, 242, 242, 0.08); } .ds-row:hover { background: #1c1c1c; } .ds-row[aria-selected=\"true\"] { background: #212121; box-shadow: none; } .ds-row[aria-selected=\"true\"] + .ds-row { box-shadow: none; } .ds-rdot { width: 8px; height: 8px; margin-top: 7px; border-radius: 2px; background: #a0a0a0; } .ds-rdot--critical { background: #f07070; box-shadow: 0 0 0 3px rgba(240, 112, 112, 0.16); } .ds-rdot--high { background: #ec9055; } .ds-rdot--medium { background: #d8b763; } .ds-row-main { display: grid; gap: 3px; min-width: 0; } .ds-row-title { color: #f2f2f2; font: 500 14.5px/1.4 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-row-where { color: #8f8f8f; font: 400 13px/1.45 \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; overflow-wrap: anywhere; } .ds-row-meta { display: grid; justify-items: end; gap: 3px; padding-top: 1px; } .ds-row-sev { color: #cfcfcf; font: 400 13px/1.45 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-row-rule { color: #8f8f8f; font: 400 12.5px/1.45 \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; } @media (prefers-reduced-motion: reduce) { .ds-row { transition: none; transform: none; } }"
+    },
+    {
+      "name": "Grade Tile",
+      "kind": "card",
+      "refersTo": "grade-tile",
+      "description": "The check-up summary: the grade letter toned by result, the score in mono, the API title and the documentation meter.",
+      "html": "<div class=\"ds-g-grade\"><div class=\"ds-summary\"><div class=\"ds-grade\" role=\"img\" aria-label=\"Grade F, 18 out of 100\"><span class=\"ds-grade-letter\">F</span><span class=\"ds-grade-score\">18/100</span></div><div class=\"ds-summary-text\"><p class=\"ds-summary-title\">Larkspur Lending API 2.4.0</p><p class=\"ds-summary-meta\">36 findings from the spec, the response, the token</p><p class=\"ds-summary-docs\"><span class=\"ds-meter\" aria-hidden=\"true\"></span>Documentation 40/100</p></div></div></div>",
+      "css": ".ds-g-grade { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-summary { display: flex; gap: 18px; align-items: center; } .ds-grade { display: grid; place-items: center; align-content: center; flex: none; width: 78px; height: 78px; border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 8px; background: #1c1c1c; } .ds-grade-letter { color: #f07070; font: 500 40px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.03em; } .ds-grade-score { margin-top: 4px; color: #8f8f8f; font: 400 12.5px/1 \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; } .ds-summary-text { display: grid; gap: 4px; min-width: 0; } .ds-summary-text p { margin: 0; } .ds-summary-title { color: #f2f2f2; font: 500 20px/1.3 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.015em; } .ds-summary-meta { color: #8f8f8f; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-summary-docs { display: inline-flex; align-items: center; gap: 10px; color: #cfcfcf; font: 400 13px/1.4 \"DM Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace; } .ds-meter { position: relative; width: 84px; height: 4px; border-radius: 2px; background: #212121; overflow: hidden; } .ds-meter::after { content: \"\"; position: absolute; inset: 0 auto 0 0; width: 40%; background: #a08672; border-radius: 2px; }"
+    },
+    {
+      "name": "Framework Segmented Control",
+      "kind": "nav",
+      "refersTo": "segmented",
+      "description": "Chooses the framework for fix code; a tablist kept in sync with the top bar select.",
+      "html": "<div class=\"ds-g-seg\"><div class=\"ds-seg\" role=\"tablist\" aria-label=\"Framework\"><button class=\"ds-seg-item\" role=\"tab\" aria-selected=\"false\" type=\"button\">Express</button><button class=\"ds-seg-item\" role=\"tab\" aria-selected=\"true\" type=\"button\">FastAPI</button><button class=\"ds-seg-item\" role=\"tab\" aria-selected=\"false\" type=\"button\">Django</button><button class=\"ds-seg-item\" role=\"tab\" aria-selected=\"false\" type=\"button\">Laravel</button><button class=\"ds-seg-item\" role=\"tab\" aria-selected=\"false\" type=\"button\">Spring</button></div></div>",
+      "css": ".ds-g-seg { background: var(--bg, #111111); color: var(--ink, #f2f2f2); padding: 24px; font: 400 14px/1.5 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; } .ds-seg { display: flex; flex-wrap: wrap; padding: 3px; width: max-content; max-width: 100%; border: 1px solid rgba(242, 242, 242, 0.14); border-radius: 6px; } .ds-seg-item { height: 30px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; color: #8f8f8f; font: 500 13px/1 \"Instrument Sans\", ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-seg-item:hover { color: #f2f2f2; } .ds-seg-item[aria-selected=\"true\"] { background: #212121; color: #f2f2f2; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); } .ds-seg-item:focus-visible { outline: 2px solid #a08672; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-seg-item { transition: none; transform: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Inspection Desk",
+    "overview": "Patchlane is an inspection desk at night: a graphite ground, chalk-white text, and one bronze lamp that lights only what you can act on. Everything else on screen is evidence (operations, headers, claims, tool names) set in a monospaced face and ranked by severity colours that never appear without their word. The mood is calm and exact. Nothing shouts or glows; the interface earns trust by showing what it matched rather than by decorating it.\n\nTwo densities share one world. The landing page is a software site built on the taste-skill kit: one section per screen, 120px section tops, a collage hero whose product window floats on a painterly landscape drawn in WebGL, one chalk inverse band, and the product name set across the closing screen. The check-up app and the rules catalogue are operate-and-read surfaces: 14px chrome, three independently scrolling desks, every state drawn, and hairlines doing the work that shadows do elsewhere.\n\nDepth is tonal and linear, not atmospheric. Corners are sharp (4, 6, 8px). Motion only answers the pointer, the keyboard or a selection; the hero settles once on load and one row of figures rolls once. Fonts and assets are self-hosted and every page runs under a strict content security policy, so no surface depends on a third party.",
+    "keyCharacteristics": [
+      "Graphite ground (#111111) with chalk ink (#f2f2f2) and one bronze accent (#a08672) for action, selection and focus.",
+      "Instrument Sans at weight 500 with tight negative tracking for display; DM Mono for everything a machine wrote.",
+      "Five fixed severity hues, always beside their label.",
+      "Flat surfaces separated by 1px chalk hairlines at 8% and 14%; shadows only on things that float.",
+      "Sharp radius scale: 4px controls, 6px blocks, 8px tiles and frames.",
+      "Landing: one section per screen on a 12-column, 1280px grid. App: three desks that collapse to two, then one.",
+      "WCAG 2.2 AA, 44px touch targets, reduced motion honoured on every surface."
+    ],
+    "rules": [
+      {
+        "name": "The One Lamp Rule",
+        "body": "Bronze is the only accent and it means \"act here\" or \"this is selected\". One filled bronze button per view; no bronze headings, decorative borders, gradients or fills wider than a control.",
+        "section": "colors"
+      },
+      {
+        "name": "The Word Beside the Dot Rule",
+        "body": "A severity colour never carries meaning alone: every dot, chip, pill and row shows the word (Critical, High, Medium, Low, Info). Severity hues are used for risk, failure and the grade, never for categories or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Graphite Ground Rule",
+        "body": "Every surface is dark. The chalk band is the only light ground in the product and it stays one section long.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Means Machine Rule",
+        "body": "DM Mono is for anything a machine wrote or will read: code, paths, operations, header and claim names, rule ids, evidence, versions, counts and scores. Sentences, labels and headings are never mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Weights Rule",
+        "body": "400 to read, 500 to label or head. Nothing in the interface is set at 600 or 700; the one exception is the \"P\" inside the app's brand tile.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tight Display Rule",
+        "body": "Display, headline and title sizes track negative (-0.022em to -0.036em) at weight 500; text sizes track at 0.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Screen Rule",
+        "body": "On the landing a section is one screen with its h2 first; content that does not fit is cut or moved, never allowed to spill into the next screen.",
+        "section": "layout"
+      },
+      {
+        "name": "The Three Desks Rule",
+        "body": "The app always reads inputs, findings, detail from left to right, and collapses in that order: detail to a sheet, then everything to one column with a switch.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Desk Rule",
+        "body": "UI surfaces at rest carry no shadow. Separate with a hairline; lift only what actually floats (a menu, the sheet, an illustration over its ground).",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep Patina Bronze (#a08672) for the one primary action per view, the selection marker and the focus ring, with Graphite (#111111) text on it.",
+      "**Do** lift bronze to Lit Bronze (#b9a08b) for hover and for bronze text on dark ground.",
+      "**Do** pair every severity colour with its word, and keep the five severity hues for risk, failure and the grade.",
+      "**Do** set code, paths, rule ids, evidence, versions, counts and scores in DM Mono at 12.5–13px, and everything else in Instrument Sans.",
+      "**Do** separate with a 1px hairline (8% between regions, 14% around controls) before a tonal step, and a tonal step before a shadow.",
+      "**Do** use 4px corners for controls, 6px for blocks and code, 8px for tiles and frames.",
+      "**Do** draw every state: hover, the 2px bronze focus outline at 2px offset, selected, pressed, disabled (45%), empty and error.",
+      "**Do** make touch targets 44px on coarse pointers and keep every analyzer action reachable by keyboard (tabs, listbox, J and K, Escape).",
+      "**Do** keep text at 4.5:1 or better: Ash (#8f8f8f) is the lowest text tone on Graphite, and Faint (#7d7d7d) is for placeholders and line numbers on Inkwell only.",
+      "**Do** self-host every font and asset so each page runs under the strict CSP (self only, two hashed inline scripts).",
+      "**Do** honour reduced motion: no transforms, a still WebGL frame, figures that stand."
+    ],
+    "donts": [
+      "**Don't** introduce a second accent hue, bronze gradients, or bronze fills wider than a control.",
+      "**Don't** show a severity colour without its label, or use severity hues for categories or decoration.",
+      "**Don't** darken bronze on hover on dark ground: the kit's 84% mix toward Graphite drops the button text to about 4.2:1.",
+      "**Don't** round past 8px or make buttons pill-shaped; full rounding is only for count badges, status dots and scrollbar thumbs.",
+      "**Don't** shadow resting UI surfaces or add glows; the critical dot's halo is the only one, and the detail head is the only blurred layer.",
+      "**Don't** add scroll-triggered reveals or parallax; the counter roll is the one moment that starts on scroll, and the hero entrance plays once on load.",
+      "**Don't** set any heading or label at 600 or 700; display is 500 with negative tracking.",
+      "**Don't** put prose in DM Mono or code in Instrument Sans.",
+      "**Don't** load fonts, scripts, images or analytics from another origin.",
+      "**Don't** use text glyphs (→, ✓) as icons; arrows and ticks are drawn SVG, like the button arrow and the check box tick.",
+      "**Don't** bring the landing's filled section tabs into the app; the app uses underline desk tabs and the segmented control."
+    ]
+  }
+}

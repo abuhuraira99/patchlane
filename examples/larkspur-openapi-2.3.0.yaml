@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: Larkspur Lending API
+  version: 2.3.0
+servers:
+  - url: https://api.larkspur.example/v2
+paths:
+  /v2/loans/{loanId}:
+    get:
+      operationId: getLoan
+      summary: Read one loan
+      security:
+        - bearer: [loans:read]
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          description: The loan
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Loan' }
+        '404': { description: Not found }
+  /v2/refunds:
+    post:
+      operationId: issueRefund
+      summary: Refund a repayment
+      security:
+        - bearer: [refunds:write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                loanId: { type: string }
+                amount: { type: number, maximum: 5000 }
+      responses:
+        '201': { description: Created }
+        '429': { description: Too many requests }
+components:
+  securitySchemes:
+    bearer: { type: http, scheme: bearer, bearerFormat: JWT }
+  schemas:
+    Loan:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: number }
+        status: { type: string }

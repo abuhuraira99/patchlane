@@ -1,0 +1,30 @@
+/* The rules catalogue: a Read surface. One measure, generous rhythm, the app's tokens. */
+body.page { height: auto; }
+.page .top { position: sticky; }
+.doc { max-width: 880px; margin: 0 auto; padding: 64px 24px 120px; }
+.doc__head { display: grid; gap: 14px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+.doc__title { font-size: clamp(32px, 2.4vw + 18px, 48px); line-height: 1.08; font-weight: 500; letter-spacing: -0.03em; text-wrap: balance; }
+.doc__lead { color: var(--ink-2); font-size: 17px; line-height: 1.6; max-width: 62ch; }
+.doc__tools { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.doc__tools .input { width: min(420px, 100%); height: 42px; }
+.rules__group { padding-top: 48px; }
+.rules__group-title { display: flex; align-items: baseline; gap: 12px; padding-bottom: 8px; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+.rules__group-title span { color: var(--muted); font: 400 14px/1 var(--mono); }
+.rule { display: grid; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+.rule:target { background: linear-gradient(90deg, var(--accent-wash), transparent 70%); margin: 0 -16px; padding: 22px 16px; border-radius: var(--r-md); }
+.rule__head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rule__id { color: var(--accent-hi); font: 500 13.5px/1 var(--mono); text-decoration: none; }
+.rule__id:hover { text-decoration: underline; }
+.rule__title { font-size: 18px; font-weight: 500; letter-spacing: -0.01em; }
+.rule__text, .rule__fix { color: var(--ink-2); font-size: 15px; line-height: 1.65; max-width: 70ch; }
+.rule__fix b { color: var(--ink); font-weight: 500; }
+.rule__src { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: 13px; }
+.rule__code { color: var(--ink-2); }
+.rules__none { padding: 40px 0; color: var(--muted); }
+.prose { display: grid; gap: 18px; color: var(--ink-2); font-size: 16px; line-height: 1.7; max-width: 66ch; }
+.prose h2 { color: var(--ink); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 18px; }
+.prose ul { display: grid; gap: 8px; padding-left: 18px; list-style: disc; }
+.prose code { padding: 1px 5px; background: var(--surface); border-radius: 3px; color: var(--ink); }
+.page-foot { display: flex; gap: 20px; flex-wrap: wrap; max-width: 880px; margin: 0 auto; padding: 24px 24px 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+.page-foot a { color: var(--muted); }
+@media (max-width: 759px) { .doc { padding: 40px 16px 80px; } }

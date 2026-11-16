@@ -1,0 +1,511 @@
+{
+ "start": "2026-11-16T02:10:57.339Z",
+ "round": 0,
+ "idle": 0,
+ "errors": 0,
+ "status": "pass",
+ "history": [
+  {
+   "at": "2026-11-16T02:13:21.084Z",
+   "mode": "manual",
+   "status": "pass",
+   "fails": 0,
+   "round": 0,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "dist/index.html",
+  "url": null,
+  "root": "dist",
+  "kind": "software",
+  "category": "API security check-up",
+  "primary": "Start a check-up",
+  "rounds": 3,
+  "start": "2026-11-16T02:10:57.339Z",
+  "by": "gate.mjs --start"
+ },
+ "manual": true,
+ "fp": "8aff281a4ad28cd1",
+ "page": "dist/index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "scroll-reveal",
+    "where": "section#ci > div.wrap > div.ci-diagram > div.dg \"openapi.yaml v2.4.0 Patchlane Browser 36\"",
+    "msg": "starts \"color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--pill:nth-of-type(1)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "scroll-reveal"
+    ],
+    "wheres": [
+     "section#ci > div.wrap > div.ci-diagram > div.dg \"openapi.yaml v2.4.0 Patchlane Browser 36\""
+    ]
+   },
+   {
+    "check": "off-grid",
+    "where": "div.closing__links > div.grid > div.span-4.stack-4 > a.nav__logo \"P Patchlane\"",
+    "msg": "left edge at 103.5px, 23.5px off the page margin at 80px (36 elements, like span.mark.mark--initial)",
+    "fix": "move it onto the page margin, or the column edge its section uses",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "off-grid"
+    ],
+    "wheres": [
+     "div.closing__links > div.grid > div.span-4.stack-4 > a.nav__logo \"P Patchlane\""
+    ]
+   },
+   {
+    "check": "cut-text",
+    "where": "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"openapi.yaml\"",
+    "msg": "runs past the edge of its box div.ci-diagram > div.dg > div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) (and 3 more like it: \"Browser\", \"Terminal\", \"Code scanning\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "cut-text"
+    ],
+    "wheres": [
+     "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"openapi.yaml\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "nav",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > a.nav__logo \"P Patchlane\"",
+    "msg": "the nav is lopsided: its first item starts 7px inside the content's edge (80px), while its last ends on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.pa-list > div.pa-row:nth-of-type(10) > span > code \"POST /v2/assistant/chat\"",
+    "msg": "cut 8px at the bottom by the overflow of section#product > div.wrap > div.ui.app > div.app__pane.app__pane--list: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "p.t-stat.span-2 > span.mo-cr__col:nth-of-type(1) > span.mo-cr__strip > span:nth-of-type(2) \"2\"",
+    "msg": "cut 42px at the bottom by the overflow of div.facts-rows > div.facts-row.grid:nth-of-type(1) > p.t-stat.span-2 > span.mo-cr__col:nth-of-type(1) (inside a held section or scroll scene, whose motion --quick does not check) (and 4 more like it: \"1\", \"1\", \"2\", \"1\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "p.t-stat.span-2 > span.mo-cr__col > span.mo-cr__strip > span:nth-of-type(2) \"6\"",
+    "msg": "cut 42px at the bottom by the overflow of div.facts-rows > div.facts-row.grid:nth-of-type(3) > p.t-stat.span-2 > span.mo-cr__col (inside a held section or scroll scene, whose motion --quick does not check) (and 1 more like it: \"1\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#numbers > div.wrap > div.facts-rows \"1 2 3 4 5 6 7 8 9 0 1 0 1 2 3 4 5 6 7 8 \"",
+    "msg": "starts an animation (1.4 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-cr__strip (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headline",
+    "where": "h1#hero-h \"Security check‑up for APIs and AI agent \"",
+    "msg": "the h1 has 9 words (2 to 8 read at a glance)",
+    "fix": "put the category noun in the h1 (and who it is for, or where), in 2 to 8 words",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headings",
+    "where": "div.grid > div.faq.span-6 > div.faq__item:nth-of-type(5) > h3 \"Is the Patchlane source code open?\"",
+    "msg": "\"Is the Patchlane source code open?\" names no product, part, place or section (the one brand line a page may have)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "contrast",
+    "where": "p.t-stat.span-2 > span.mo-cr__col:nth-of-type(2) > span.mo-cr__strip > span:nth-of-type(15) \"4\"",
+    "msg": "large text over a picture reads at 1.1:1 at its worst tenth (needs 3:1), on a busy ground (inside a held section or scroll scene, whose motion --quick does not check) (and 4 more like it: \"4\", \"4\", \"7\", \"8\")",
+    "fix": "put the text on a calm part of the picture, or on a solid panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "contrast",
+    "where": "p.t-stat.span-2 > span.mo-cr__col:nth-of-type(2) > span.mo-cr__strip > span:nth-of-type(16) \"5\"",
+    "msg": "large text over a picture reads at 1.1:1 at its worst tenth (needs 3:1) (inside a held section or scroll scene, whose motion --quick does not check) (and 30 more like it: \"5\", \"2\", \"5\", \"8\", ...)",
+    "fix": "put the text on a calm part of the picture, or on a solid panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "contrast",
+    "where": "p.t-stat.span-2 > span.mo-cr__col:nth-of-type(2) > span.mo-cr__strip > span:nth-of-type(21) \"0\"",
+    "msg": "large text over a effect reads at 1.1:1 at its worst tenth (needs 3:1), on a busy ground (inside a held section or scroll scene, whose motion --quick does not check) (and 1 more like it: \"0\")",
+    "fix": "put the text on a calm part of the picture, or on a solid panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "busy-ground",
+    "where": "div.grid > div.faq.span-6 > div.faq__item:nth-of-type(1) > h3 \"Does my spec leave the browser?\"",
+    "msg": "text over a detailed part of a picture (its ground changes by 1.8 L* from one pixel to the next under the words) (and 9 more like it: \"No. The checks run in th\", \"What can a spec not tell\", \"Whether the server reall\", \"Which API files does Pat\", ...)",
+    "fix": "move the text to a calm part of the picture, or put it on a panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--collage / section#product",
+    "msg": "180px between these sections, -31% against the median 259px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#product / section#checks",
+    "msg": "188px between these sections, -27% against the median 259px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > a.nav__logo \"P Patchlane\"",
+    "msg": "\"P Patchlane\" opens a section headed \"Security check‑up for APIs and AI agent tools\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(1) > a.nav__link \"Product\"",
+    "msg": "\"Product\" opens a section headed \"Every API finding comes with its fix\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(1) \"Spec reviewOWASP API Top 10, auth, docs\"",
+    "msg": "\"Spec reviewOWASP API Top 10, auth, docs\" opens a section headed \"Five checks on what you already have\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(2) \"Server answersCORS, cookies, headers, er\"",
+    "msg": "\"Server answersCORS, cookies, headers, er\" opens a section headed \"Five checks on what you already have\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(3) \"Access tokensAlgorithm, lifetime, audien\"",
+    "msg": "\"Access tokensAlgorithm, lifetime, audien\" opens a section headed \"Five checks on what you already have\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(2) > a:nth-of-type(1) \"Release diffRegressions and the version \"",
+    "msg": "\"Release diffRegressions and the version \" opens a section headed \"Five checks on what you already have\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(2) > a:nth-of-type(2) \"CI gateGitHub Action with SARIF\"",
+    "msg": "\"CI gateGitHub Action with SARIF\" opens a section headed \"The same API checks in the browser, the terminal a\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(3) > a:nth-of-type(2) \"LLM endpointsPrompts, models, spend, out\"",
+    "msg": "\"LLM endpointsPrompts, models, spend, out\" opens a section headed \"Checks the tools your AI agents call\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(3) > a:nth-of-type(3) \"SafeguardsApproval, identity, logs, egre\"",
+    "msg": "\"SafeguardsApproval, identity, logs, egre\" opens a section headed \"Checks the tools your AI agents call\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(1) \"Spec reviewOWASP API Top 10, a\"",
+    "msg": "4 entries of one menu go to the same place (#checks): \"Spec reviewOWASP API Top 10, a\", \"Server answersCORS, cookies, h\", \"Access tokensAlgorithm, lifeti\", \"Release diffRegressions and th\"",
+    "fix": "give each menu entry its own target (its section, its tab, its page), or show fewer entries",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(3) > a:nth-of-type(1) \"Tool definitionsMCP, OpenAI an\"",
+    "msg": "3 entries of one menu go to the same place (#agents): \"Tool definitionsMCP, OpenAI an\", \"LLM endpointsPrompts, models, \", \"SafeguardsApproval, identity, \"",
+    "fix": "give each menu entry its own target (its section, its tab, its page), or show fewer entries",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "tab-wrap",
+    "where": "button#tab-5 \"Gate a pull request\"",
+    "msg": "the row of 5 tabs wraps onto 5 lines and leaves \"Gate a pull request\" alone on the last",
+    "fix": "fit the tabs on one line at this width (shorter labels, a scrolling row), or let them stack evenly",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "fade-cut",
+    "where": "div#screen-1 > div.pv__ops > div:nth-of-type(9) > span.pv__m.pv__m--put \"PUT\"",
+    "msg": "2 lines of div.frame.frame--split fade out under its edge (\"PUT\", \"/v2/admin/rates\"): drawn at a fraction of #c9b29f on #151515, half-erased",
+    "fix": "fit the mock's rows inside its panel (fewer rows, a taller panel), or end the fade below the last whole row: no row half-erased",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-length",
+    "where": "section#faq \"Questions\"",
+    "msg": "1 section over 90 words a screen outside the UI mocks (\"Questions\" 130); 73 words a screen across the page (512 words in 7 screens): a tech page says it in about 80 or fewer",
+    "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-current",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary:nth-of-type(2) \"start a check-up\"",
+    "msg": "\"start a check-up\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.stage > div.at-corner.to-edge > pre.tl__code > span.tk-s:nth-of-type(4) \"\"Download a document from a link\"",
+    "msg": "cut 45px at the right by the overflow of section#agents > div.wrap > div.grid > div.frame.frame--split: a fragment run out through its panel's edge (and 2 more like it: \"<important>Before using \", \"tell the user about this\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "no-visual",
+    "where": "section#ci \"The same API checks in the browser, the \"",
+    "msg": "pictures, effects and mocks cover 25% of this section; a feature section needs a visual (about 25% or more)",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "text-contrast",
+    "where": "div.stage > div.at-corner.to-edge > pre.tl__code > span.tk-p:nth-of-type(15) \"\"name\"\"",
+    "msg": "11 lines of text in drawn mocks read under 4.5:1 (5 colour pairs), the worst \"\"name\"\" in #e6e6e6 on #f2f2f2 at 1.11:1",
+    "fix": "lift the mocks' muted text (labels, meta, initials) to 4.5:1 on their own panel, or set it larger",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "busy-ground",
+    "where": "div.wrap > div.grid > div.span-5.stack-4 > p \"What teams ask before they paste a spec \"",
+    "msg": "text over a detailed part of a picture (its ground changes by 1.5 L* from one pixel to the next under the words) (and 10 more like it: \"Does my spec leave the b\", \"No. The checks run in th\", \"What can a spec not tell\", \"Whether the server reall\", ...)",
+    "fix": "move the text to a calm part of the picture, or put it on a panel",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#faq / footer#contact",
+    "msg": "184px between these sections, +29% against the median 143px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#checks / section#agents",
+    "msg": "uneven space at the edge of a band: 49px outside its edge, 94px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#agents / section#ci",
+    "msg": "uneven space at the edge of a band: 94px outside its edge, 49px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 137,
+   "layout": 6
+  }
+ },
+ "open": [],
+ "waived": [
+  {
+   "check": "scroll-reveal",
+   "where": "section#ci > div.wrap > div.ci-diagram > div.dg \"openapi.yaml v2.4.0 Patchlane Browser 36\"",
+   "msg": "starts \"color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--pill:nth-of-type(1)",
+   "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "scroll-reveal"
+   ],
+   "wheres": [
+    "section#ci > div.wrap > div.ci-diagram > div.dg \"openapi.yaml v2.4.0 Patchlane Browser 36\""
+   ],
+   "reason": "kit diagram (assets/diagrams): held still with data-dg-still, it draws at rest; its IntersectionObserver only pauses it off screen, so nothing reveals on scroll"
+  },
+  {
+   "check": "off-grid",
+   "where": "div.closing__links > div.grid > div.span-4.stack-4 > a.nav__logo \"P Patchlane\"",
+   "msg": "left edge at 103.5px, 23.5px off the page margin at 80px (36 elements, like span.mark.mark--initial)",
+   "fix": "move it onto the page margin, or the column edge its section uses",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "off-grid"
+   ],
+   "wheres": [
+    "div.closing__links > div.grid > div.span-4.stack-4 > a.nav__logo \"P Patchlane\""
+   ],
+   "reason": "kit footer logo: the dealt initial mark sits on the page margin and the name follows it, exactly as in the nav; the check reads the name, not the mark"
+  },
+  {
+   "check": "cut-text",
+   "where": "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"openapi.yaml\"",
+   "msg": "runs past the edge of its box div.ci-diagram > div.dg > div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) (and 3 more like it: \"Browser\", \"Terminal\", \"Code scanning\")",
+   "fix": "give the text room: no overflow clipping a line, no line past its box",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "cut-text"
+   ],
+   "wheres": [
+    "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"openapi.yaml\""
+   ],
+   "reason": "kit diagram on a phone: the lanes turn vertical and each caption is centred under its 36px tile, wider than the tile by design; no glyph is clipped"
+  }
+ ],
+ "warnCount": 36,
+ "at": "2026-11-16T02:13:21.084Z"
+}

@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Typecheck, test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: The committed CLI bundle matches the source
+        run: git diff --exit-code -- cli/dist/patchlane.mjs
+
+  action:
+    name: Run the Action on the example API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the Larkspur example (reports only)
+        uses: ./
+        with:
+          spec: examples/larkspur-openapi.yaml
+          previous: examples/larkspur-openapi-2.3.0.yaml
+          tools: examples/tools.json
+          fail-on: none
+          sarif: patchlane.sarif
+          report: patchlane-report.md
+          framework: fastapi
+      - name: The gate fails on a high finding
+        run: |
+          if node cli/dist/patchlane.mjs check examples/larkspur-openapi.yaml --fail-on high --quiet; then
+            echo "expected exit 1"; exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: patchlane-example-report
+          path: |
+            patchlane.sarif
+            patchlane-report.md

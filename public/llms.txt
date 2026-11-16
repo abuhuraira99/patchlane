@@ -1,0 +1,14 @@
+# Patchlane
+
+> A security check-up for APIs and the AI agents that call them. Paste an OpenAPI or Swagger spec, a raw HTTP response, a JWT or an MCP tool list and get findings ranked by severity, each mapped to the OWASP API Security Top 10 or OWASP LLM guidance, with fix code for Express, FastAPI, Django REST Framework, Laravel or Spring Boot. Everything runs in the browser; nothing is uploaded. The same engine runs as a CLI and a GitHub Action that writes SARIF.
+
+## Use it
+
+- [Check-up (web app)](https://patchlane.pages.dev/app/): paste inputs, read findings and fixes, export Markdown, SARIF, JSON or Gherkin
+- [Sample report](https://patchlane.pages.dev/app/?sample=1): a made-up lending API with problems on purpose
+- [Every rule](https://patchlane.pages.dev/rules/): the 100 checks, their standards and fixes
+
+## Source
+
+- [GitHub repository](https://github.com/abuhuraira99/patchlane): engine, tests, CLI and the GitHub Action (MIT)
+- [Privacy](https://patchlane.pages.dev/privacy): no backend, no analytics, nothing you paste leaves the tab
