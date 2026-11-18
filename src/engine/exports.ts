@@ -95,7 +95,7 @@ export function toMarkdown(report: FullReport, framework?: Framework): string {
       L.push(`\`${f.rule}\` · ${AREA_LABEL[f.area]} · **${f.where}**`, '');
       if (f.evidence) L.push(`> ${f.evidence}`, '');
       L.push(f.detail, '', `**Fix.** ${f.fix}`, '');
-      const refs = f.refs.map((r) => [r.standard, r.course && `course: ${r.course}`].filter(Boolean).join(' · ')).filter(Boolean);
+      const refs = f.refs.map((r) => r.standard).filter(Boolean);
       if (refs.length) L.push(`<sub>${refs.join(' | ')}</sub>`, '');
       if (framework) {
         const fx = fixFor(f.rule, framework);

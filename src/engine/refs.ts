@@ -1,20 +1,4 @@
-// Course and standard names used in rule references, in one place so the wording never drifts.
-
-export const COURSE = {
-  fundamentals: 'API Security Fundamentals 2025',
-  owasp: 'OWASP API Security Top 10 and Beyond',
-  auth: 'API Authentication',
-  servers: 'Securing API Servers',
-  docs: 'API Documentation Best Practices',
-  pentestIntro: 'Getting Started in API Pen-Testing',
-  pentest: 'API Penetration Testing',
-  devsecops: 'API Security in the World of DevSecOps',
-  startLeft: 'Start Left: API SecDevOps',
-  mcp: 'MCP Security Fundamentals',
-  llm: 'Securing LLM & NLP APIs',
-  buildingAi: 'Building Security into AI',
-  exploitability: 'Foundations of AI-Based Application Exploitability',
-} as const;
+// Standard names used in rule references, in one place so the wording never drifts.
 
 export const API_TOP10 = {
   API1: 'API1:2023 Broken Object Level Authorization',

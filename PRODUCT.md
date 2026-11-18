@@ -44,11 +44,12 @@ Success: a team fixes a real authorization, exposure or configuration problem be
 
 - Name: **Patchlane** (searched 2026-11-15, no conflicting product; see names.json).
 - Voice: plain, exact, calm. Says what was found, where, and what to do. No fear selling.
-- Every rule cites its source: the OWASP API Security Top 10 (2023), OWASP LLM guidance, and the APIsec University course that taught it.
+- Every rule cites the public standard it maps to: the OWASP API Security Top 10 (2023) or OWASP LLM guidance.
+- The product never mentions how it was made (courses, certificates, the author's learning); that story belongs on the author's profile, not in the tool.
 
 ## Evidence on Hand
 
-- The engine and its rules (src/engine), the 13 APIsec University courses the rules come from (../certificates/linkedin-entries.md).
+- The engine and its rules (src/engine).
 - No customers, testimonials, logos, usage numbers or benchmarks exist. Do not invent any.
 
 ## Product Principles

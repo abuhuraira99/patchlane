@@ -9,12 +9,10 @@ export function severityRank(s: Severity): number {
   return SEVERITY_ORDER.indexOf(s);
 }
 
-/** Where a rule comes from: a public standard plus the course module that taught it. */
+/** The public standard a rule maps to. */
 export interface Ref {
   /** e.g. "API1:2023 Broken Object Level Authorization" or "OWASP LLM: Prompt injection" */
   standard?: string;
-  /** e.g. "OWASP API Security Top 10 and Beyond" */
-  course?: string;
 }
 
 export type FindingArea = 'api' | 'auth' | 'docs' | 'inventory' | 'server' | 'token' | 'release' | 'agent';

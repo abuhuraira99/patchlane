@@ -1,12 +1,12 @@
 {
- "start": "2026-11-16T02:10:57.339Z",
+ "start": "2026-11-18T11:19:35.659Z",
  "round": 0,
  "idle": 0,
  "errors": 0,
  "status": "pass",
  "history": [
   {
-   "at": "2026-11-16T02:13:21.084Z",
+   "at": "2026-11-18T11:22:16.648Z",
    "mode": "manual",
    "status": "pass",
    "fails": 0,
@@ -24,11 +24,11 @@
   "category": "API security check-up",
   "primary": "Start a check-up",
   "rounds": 3,
-  "start": "2026-11-16T02:10:57.339Z",
+  "start": "2026-11-18T11:19:35.659Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "fp": "8aff281a4ad28cd1",
+ "fp": "2b40ad8594266522",
  "page": "dist/index.html",
  "found": {
   "fails": [
@@ -347,7 +347,7 @@
    {
     "check": "copy-length",
     "where": "section#faq \"Questions\"",
-    "msg": "1 section over 90 words a screen outside the UI mocks (\"Questions\" 130); 73 words a screen across the page (512 words in 7 screens): a tech page says it in about 80 or fewer",
+    "msg": "1 section over 90 words a screen outside the UI mocks (\"Questions\" 130); 74 words a screen across the page (515 words in 7 screens): a tech page says it in about 80 or fewer",
     "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
     "widths": [
      1440
@@ -447,8 +447,8 @@
   ],
   "crashed": [],
   "seconds": {
-   "consistency": 137,
-   "layout": 6
+   "consistency": 153,
+   "layout": 7
   }
  },
  "open": [],
@@ -507,5 +507,5 @@
   }
  ],
  "warnCount": 36,
- "at": "2026-11-16T02:13:21.084Z"
+ "at": "2026-11-18T11:22:16.649Z"
 }

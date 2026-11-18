@@ -15,7 +15,7 @@ npm run build      # typecheck, site build, CLI bundle, security headers
 
 ## Adding a rule
 
-1. Add the check to the right module in `src/engine/` (`api-checks.ts`, `server-checks.ts`, `jwt.ts`, `diff.ts`, `agent.ts`). Give it a stable id (`AREA-SHORT-NAME`), a severity, a title that states the problem, `detail` (why it matters), `fix` (what to do) and `refs` (the standard and the course it comes from, from `refs.ts`).
+1. Add the check to the right module in `src/engine/` (`api-checks.ts`, `server-checks.ts`, `jwt.ts`, `diff.ts`, `agent.ts`). Give it a stable id (`AREA-SHORT-NAME`), a severity, a title that states the problem, `detail` (why it matters), `fix` (what to do) and `refs` (the public standard it maps to, from `refs.ts`).
 2. Add an input to `src/engine/fixtures.ts` that triggers it. `tests/coverage.test.ts` fails until every rule id is produced by a fixture.
 3. If code can fix it, map the rule to a fix family in `src/engine/fixes.ts` (`fixKeyForRule`).
 4. If a test can prove the fix, add a Given-When-Then template in `src/engine/exports.ts` (`scenario`).

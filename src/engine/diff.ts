@@ -1,5 +1,5 @@
 import type { ApiModel, Finding, OperationModel } from './types';
-import { API_TOP10, COURSE } from './refs';
+import { API_TOP10 } from './refs';
 
 // Release check: compares two versions of a spec. It reports security regressions and breaking changes,
 // and says which semantic-version bump the change needs (MAJOR.MINOR.PATCH, as taught in "Start Left").
@@ -63,13 +63,13 @@ export function diffApis(before: ApiModel, after: ApiModel): ReleaseDiff {
   const findings: Finding[] = [];
   let need: Bump = 'none';
   const raise = (x: Bump) => { if (RANK[x] > RANK[need]) need = x; };
-  const ref = (s?: string) => [{ standard: s, course: COURSE.startLeft }];
+  const ref = (s?: string) => (s ? [{ standard: s }] : []);
 
   if (removed.length) {
     raise('major');
     for (const k of removed) {
       findings.push({ rule: 'REL-REMOVED', area: 'release', severity: 'medium', title: 'An operation was removed', where: k,
-        detail: 'Clients that still call it will break. This is a breaking change.', fix: 'Deprecate first with a removal date, then remove in a major version.', refs: ref() });
+        detail: 'Clients that still call it will break. This is a breaking change.', fix: 'Deprecate first with a removal date, then remove in a major version.', refs: ref(API_TOP10.API9) });
     }
   }
   if (added.length) raise('minor');
@@ -122,14 +122,14 @@ export function diffApis(before: ApiModel, after: ApiModel): ReleaseDiff {
     if (newRequired.length) {
       raise('major'); notes.push('has new required parameters');
       findings.push({ rule: 'REL-NEW-REQUIRED', area: 'release', severity: 'low', title: 'A new required parameter breaks existing clients', where: k, evidence: newRequired.map((p) => p.name).join(', '),
-        detail: 'Existing clients do not send it and will start failing.', fix: 'Make it optional with a default, or ship it in a major version.', refs: ref() });
+        detail: 'Existing clients do not send it and will start failing.', fix: 'Make it optional with a default, or ship it in a major version.', refs: ref(API_TOP10.API9) });
     }
     const respB = new Set(nb.responseFields.map((f) => f.path));
     const goneFields = na.responseFields.filter((f) => !respB.has(f.path) && !SENSITIVE.test(f.name));
     if (goneFields.length) {
       raise('major'); notes.push('dropped response fields');
       findings.push({ rule: 'REL-FIELD-REMOVED', area: 'release', severity: 'low', title: 'Response fields were removed', where: k, evidence: goneFields.slice(0, 4).map((f) => f.path).join(', '),
-        detail: 'Clients that read these fields will break.', fix: 'Keep them (deprecated) until the next major version.', refs: ref() });
+        detail: 'Clients that read these fields will break.', fix: 'Keep them (deprecated) until the next major version.', refs: ref(API_TOP10.API9) });
     }
     const addedOptional = nb.params.filter((p) => !p.required && !na.params.some((q) => q.name === p.name && q.in === p.in));
     if (addedOptional.length || nb.responseFields.length > na.responseFields.length) { raise('minor'); if (!notes.length) notes.push('gained optional parameters or fields'); }
@@ -146,7 +146,7 @@ export function diffApis(before: ApiModel, after: ApiModel): ReleaseDiff {
       title: `This release needs a ${need} version bump`, where: `info.version ${before.version} → ${after.version}`,
       detail: `The changes call for a ${need} bump, but the version ${db === 'unknown' ? 'could not be read as MAJOR.MINOR.PATCH' : db === 'none' ? 'did not change' : `only moved by a ${db}`}.`,
       fix: need === 'major' ? 'Raise the major number, or keep the old behaviour alongside the new until the next major release.' : `Raise the ${need} number.`,
-      refs: ref() });
+      refs: ref(API_TOP10.API9) });
   }
   return { added, removed, changed, findings, requiredBump: need, declared: { from: before.version, to: after.version, bump: db }, bumpOk };
 }

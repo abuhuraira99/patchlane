@@ -43,14 +43,14 @@ It is built for three kinds of people:
 | **Agents** | An MCP `tools/list` result, or OpenAI / Anthropic tool arrays; plus LLM endpoints in the spec | Invisible Unicode in tool text, descriptions that address the model, tools that move money or delete data without approval, parameters that take commands, URLs, file paths, user ids or secrets, look-alike tool names; prompts without limits, client-set system prompts, free model choice, personal data sent to the model, unescaped model output; an 8-point safeguards checklist | 29 |
 | **CI** | Nothing: it writes the workflow | A GitHub Actions workflow that fails pull requests at the severity you choose and sends SARIF to code scanning | |
 
-Every finding carries the exact operation, header, claim or tool it came from, the text that matched, why it matters, the fix, the standard it maps to (OWASP API Security Top 10 2023 or OWASP LLM guidance) and the course that taught the rule. The full list with severities and sources is in **[docs/RULES.md](docs/RULES.md)**.
+Every finding carries the exact operation, header, claim or tool it came from, the text that matched, why it matters, the fix, and the standard it maps to (OWASP API Security Top 10 2023 or OWASP LLM guidance). The full list with severities and standards is in **[docs/RULES.md](docs/RULES.md)**.
 
 ## Screenshots
 
 | | |
 |---|---|
 | ![The check-up: findings beside the open finding, with fix code](docs/screenshots/10-app-finding.jpeg) | ![Agent tool review with the instruction hidden in a tool description](docs/screenshots/11-app-agents.jpeg) |
-| **The check-up.** Grade, severity filters, the findings list, and the open finding with its fix in FastAPI and a Given-When-Then test. | **Agents desk.** A tool description that addresses the model, traced to OWASP LLM guidance and the course behind the rule. |
+| **The check-up.** Grade, severity filters, the findings list, and the open finding with its fix in FastAPI and a Given-When-Then test. | **Agents desk.** A tool description that addresses the model, with the OWASP LLM risk it maps to. |
 | ![CI desk with the generated GitHub Actions workflow](docs/screenshots/12-app-ci.jpeg) | ![Landing page: every finding comes with its fix](docs/screenshots/02-findings-and-fixes.jpeg) |
 | **CI desk.** The workflow, the terminal command and every export, one click each. | **The product page**, showing the real output of the engine on the bundled sample. |
 
@@ -219,25 +219,26 @@ node patchlane.mjs check --response response.txt
 
 Found a problem? See [SECURITY.md](SECURITY.md).
 
-## From courses to code
+## Who uses it, and for what
 
-The rules come from the OWASP API Security Top 10 (2023), OWASP guidance for LLM applications, and thirteen courses at [APIsec University](https://www.apisecuniversity.com). Each rule cites the course it came from. This is what each course became:
+| Who | When | What they get |
+|---|---|---|
+| **A product team without a security engineer** | Before a release, or before a customer's security questionnaire arrives | A ranked list of what to fix first, with code they can paste, and a CI gate so fixed problems stay fixed |
+| **A freelancer or agency** | When handing an API over to a client | A Markdown or JSON report to attach to the delivery, and Gherkin tests the client's team can run |
+| **A security reviewer or pen-tester** | At the start of an engagement | A fast, explainable first pass over the spec, a captured response, a token and the agent's tools, so manual time goes to what a static review cannot see |
+| **A team shipping an AI agent or MCP server** | Before the agent gets real tools | A review of every tool definition: hidden characters, model-directed text, actions without approval, and the parameters that hand the model too much power |
+| **A platform or DevSecOps engineer** | In every pull request | SARIF in code scanning, annotations on the spec line, and a build that fails at the severity they choose |
 
-| Course | What it became in Patchlane |
-|---|---|
-| API Security Fundamentals 2025 | The grade and severity model, sensitive business flows (API6), the shape of the report |
-| OWASP API Security Top 10 and Beyond | The spec desk: one or more rules for each of API1 to API10 |
-| API Authentication | Auth-scheme rules (keys in query strings, implicit and password grants, broad scopes) and the whole token desk |
-| Securing API Servers | The server desk: CORS, cookies, HSTS, CSP, framing, banners, error bodies, caching; path handling for agent tools |
-| API Documentation Best Practices | The documentation score and the undocumented-operation, no-error and no-owner rules |
-| Getting Started in API Pen-Testing | Findings written as evidence, impact and fix; the Markdown report |
-| API Penetration Testing | Mass assignment, SSRF, login rate limits, JWT auditing, improper assets (old versions, staging servers) |
-| API Security in the World of DevSecOps | The CLI, the GitHub Action, SARIF and code-scanning annotations, inventory ownership |
-| Start Left: API SecDevOps | The release desk with semantic-version advice, Given-When-Then security specs, status-code disclosure rules |
-| MCP Security Fundamentals | Tool-definition review: hidden characters, model-directed text, look-alike names, missing annotations |
-| Securing LLM & NLP APIs | LLM endpoint rules: prompt limits, model and token choice, personal data sent to models, spend limits |
-| Building Security into AI | Approval for high-impact tools, unescaped model output, the agent safeguards checklist |
-| Foundations of AI-Based Application Exploitability | Defensive rules for how agents are steered: untrusted content kept apart from instructions, outbound allow-lists, credentials kept out of the model |
+## Where Patchlane fits
+
+Commercial API security platforms cover design review, runtime testing and traffic monitoring, and they are priced and sold for larger companies. Patchlane covers the first of those, **the review of what an API declares**, and makes it free, open source and private:
+
+- **Free and MIT-licensed.** No account, no seat limit, no usage cap.
+- **Private by construction.** Specs, tokens and responses are read in the browser tab or on your own CI runner; there is no server to send them to.
+- **Fixes, not only findings.** Every finding that code can fix comes with the fix in your framework and a test that proves it.
+- **APIs and AI agents in one place.** The same review covers the tool definitions an agent will call your API through.
+
+It does not replace testing the running service: it tells you what to confirm there, and the Gherkin specs are how you confirm it.
 
 ## Development
 
@@ -293,4 +294,4 @@ The design system is documented in **[DESIGN.md](DESIGN.md)** (tokens, component
 
 [MIT](LICENSE) © 2026 Abu Huraira. Instrument Sans and DM Mono are under the SIL Open Font License. Product names and logos are trademarks of their owners.
 
-Built with what I learned in thirteen [APIsec University](https://www.apisecuniversity.com) courses. The rules stand on the work of the [OWASP API Security Project](https://owasp.org/API-Security/) and the [OWASP GenAI Security Project](https://genai.owasp.org/).
+The rules stand on the work of the [OWASP API Security Project](https://owasp.org/API-Security/) and the [OWASP GenAI Security Project](https://genai.owasp.org/).

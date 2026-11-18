@@ -311,7 +311,6 @@ input::placeholder, textarea::placeholder { color: var(--faint); opacity: 1; }
 .refs li { display: grid; gap: 2px; padding-left: 16px; position: relative; }
 .refs li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 1px; background: var(--accent); }
 .refs__std { color: var(--ink); font-size: 14px; }
-.refs__course { color: var(--muted); font-size: 13px; }
 
 /* ---------- phone switch ---------- */
 

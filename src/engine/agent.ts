@@ -1,5 +1,5 @@
 import type { ApiModel, Finding, OperationModel, Severity, ToolModel } from './types';
-import { API_TOP10, COURSE, LLM_RISK } from './refs';
+import { API_TOP10, LLM_RISK } from './refs';
 
 // Reviews for APIs that AI agents call: the tool definitions a model reads (MCP tools/list,
 // OpenAI or Anthropic tool arrays), the LLM endpoints in an OpenAPI spec, and a short checklist
@@ -100,7 +100,6 @@ const SECRET_PARAM = /(password|passwd|secret|api_?key|apikey|access_?token|auth
 
 export function checkTools(tools: ToolModel[]): Finding[] {
   const out: Finding[] = [];
-  const mcpRef = { course: COURSE.mcp };
 
   for (const t of tools) {
     const where = `tool ${t.name}`;
@@ -117,7 +116,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         evidence: `${hidden.count} hidden code point${hidden.count > 1 ? 's' : ''}: ${hidden.codes.slice(0, 6).join(', ')}`,
         detail: 'Zero-width, direction-override or tag characters do not show in a review tool but the model still reads them. A definition that carries them cannot be reviewed by eye.',
         fix: 'Remove every invisible code point from names, descriptions and schemas, and fail CI when a tool definition contains one.',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }, { course: COURSE.exploitability }],
+        refs: [{ standard: LLM_RISK.injection }],
       }));
     }
 
@@ -129,7 +128,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         evidence: hits[0].quote.slice(0, 160),
         detail: `The text ${hits.map((h) => h.label).join('; ')}. A tool description should only say what the tool does and what its inputs mean; anything else is an instruction the model may follow.`,
         fix: 'Rewrite the description as a plain statement of what the tool does. Review every change to tool text before it ships, as you would review code.',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }, { standard: LLM_RISK.supply, course: COURSE.exploitability }],
+        refs: [{ standard: LLM_RISK.injection }, { standard: LLM_RISK.supply }],
       }));
     }
 
@@ -140,7 +139,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         title: 'A tool moves money, deletes data or changes access', where, evidence: verb ?? (t.annotations.destructiveHint ? 'destructiveHint: true' : undefined),
         detail: 'A model can call this tool on the strength of text it has read in a document, an email or a web page. Without a person in the loop, one misread instruction becomes a real action.',
         fix: 'Have the server hold the action as pending and execute it only after the signed-in user confirms. Cap how often it can run per user per day.',
-        refs: [{ standard: LLM_RISK.agency, course: COURSE.buildingAi }, { course: COURSE.exploitability }],
+        refs: [{ standard: LLM_RISK.agency }],
       }));
     }
     if (t.source === 'mcp' && verb && t.annotations.readOnlyHint === undefined && t.annotations.destructiveHint === undefined) {
@@ -148,7 +147,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         rule: 'TOOL-NO-ANNOTATIONS', severity: 'low', title: 'A tool that changes data declares no hints', where, evidence: verb,
         detail: 'MCP clients use readOnlyHint and destructiveHint to decide when to ask the user first. Without them the client has to guess.',
         fix: 'Set readOnlyHint: false and destructiveHint: true (or false) on every tool that writes, and readOnlyHint: true on the ones that only read.',
-        refs: [mcpRef],
+        refs: [{ standard: LLM_RISK.agency }],
       }));
     }
 
@@ -159,7 +158,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
           rule: 'TOOL-FREEFORM-EXEC', severity: 'critical', title: 'A parameter takes a command, script or query', where: `${where} · ${p.name}`, evidence: p.name,
           detail: 'Whatever the model writes into this parameter runs as code or as a query. The tool can do anything the server can.',
           fix: 'Replace it with narrow tools that each take typed values (an order id, a date range) and build the query on the server.',
-          refs: [{ standard: LLM_RISK.agency, course: COURSE.mcp }, { course: COURSE.exploitability }],
+          refs: [{ standard: LLM_RISK.agency }],
         }));
       }
       if (URL_PARAM.test(p.name) || /\b(url|uri)\b/i.test(p.description ?? '') && p.type === 'string' && /fetch|download|request|load/i.test(`${t.description} ${p.description}`)) {
@@ -167,7 +166,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
           rule: 'TOOL-URL-PARAM', severity: 'medium', title: 'The model chooses a URL the server fetches', where: `${where} · ${p.name}`, evidence: p.name,
           detail: 'If the server fetches it, the model (or text it read) can point the server at internal addresses or send data to an outside host.',
           fix: 'Allow-list the hosts this tool may reach, block private and link-local ranges after DNS resolution, and never return the raw response.',
-          refs: [{ standard: API_TOP10.API7, course: COURSE.mcp }],
+          refs: [{ standard: API_TOP10.API7 }],
         }));
       }
       if (PATH_PARAM.test(p.name)) {
@@ -175,7 +174,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
           rule: 'TOOL-PATH-PARAM', severity: 'medium', title: 'The model chooses a file path', where: `${where} · ${p.name}`, evidence: p.name,
           detail: 'A path such as ../../.env reaches files outside the folder the tool was meant for.',
           fix: 'Resolve the path against one fixed base folder and reject anything that resolves outside it; prefer file ids over paths.',
-          refs: [{ standard: API_TOP10.API8, course: COURSE.servers }, mcpRef],
+          refs: [{ standard: API_TOP10.API8 }],
         }));
       }
       if (ID_PARAM.test(p.name)) {
@@ -183,7 +182,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
           rule: 'TOOL-ID-PARAM', severity: 'high', title: 'The model chooses whose data to act on', where: `${where} · ${p.name}`, evidence: p.name,
           detail: 'The tool takes the user or account as an argument, so a confused or misled model can act on someone else\'s records.',
           fix: 'Take the identity from the signed-in session on the server, drop the parameter, and check ownership of every object.',
-          refs: [{ standard: API_TOP10.API1, course: COURSE.buildingAi }, mcpRef],
+          refs: [{ standard: API_TOP10.API1 }],
         }));
       }
       if (SECRET_PARAM.test(p.name)) {
@@ -191,7 +190,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
           rule: 'TOOL-SECRET-PARAM', severity: 'high', title: 'A credential passes through the model', where: `${where} · ${p.name}`, evidence: p.name,
           detail: 'The model has to hold this secret in its context to fill the parameter, where it can be logged, echoed in an answer or sent to another tool.',
           fix: 'Inject credentials on the server side of the tool, from a secret store, and remove the parameter.',
-          refs: [{ standard: LLM_RISK.disclosure, course: COURSE.llm }, mcpRef],
+          refs: [{ standard: LLM_RISK.disclosure }],
         }));
       }
     }
@@ -200,7 +199,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         rule: 'TOOL-SCHEMA-OPEN', severity: 'low', title: 'The input schema accepts extra properties', where,
         detail: 'additionalProperties is not false, so the model can pass fields the server never meant to receive.',
         fix: 'Set additionalProperties: false, list required fields, and validate arguments on the server before acting.',
-        refs: [{ standard: API_TOP10.API3, course: COURSE.mcp }],
+        refs: [{ standard: API_TOP10.API3 }],
       }));
     }
 
@@ -212,7 +211,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         evidence: t.description.trim() ? `"${t.description.trim().slice(0, 60)}"` : '(no description)',
         detail: 'A model picks tools and fills arguments from these words. Thin descriptions lead to wrong calls.',
         fix: 'Say in one or two sentences what the tool does, what it changes and when not to use it; describe every parameter.',
-        refs: [{ course: COURSE.docs }, mcpRef],
+        refs: [],
       }));
     }
     if (t.description.length > 1500) {
@@ -220,7 +219,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         rule: 'TOOL-LONG-DESC', severity: 'low', title: 'The description is too long to review', where, evidence: `${t.description.length} characters`,
         detail: 'Very long descriptions cost context on every call and are where unwanted instructions are easiest to miss.',
         fix: 'Keep descriptions under 500 characters and move usage notes to your own documentation.',
-        refs: [mcpRef],
+        refs: [{ standard: LLM_RISK.injection }],
       }));
     }
   }
@@ -235,7 +234,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
         rule: 'TOOL-LOOKALIKE', severity: 'high', title: 'A tool name uses non-ASCII letters', where: `tool ${revealHidden(t.name)}`,
         detail: 'Letters from another alphabet can make one tool look like another, so a reviewer approves the wrong one.',
         fix: 'Restrict tool names to [a-z0-9_-] and reject anything else when servers register tools.',
-        refs: [{ standard: LLM_RISK.supply, course: COURSE.mcp }],
+        refs: [{ standard: LLM_RISK.supply }],
       }));
     }
   }
@@ -254,7 +253,7 @@ export function checkTools(tools: ToolModel[]): Finding[] {
             ? 'When two servers register the same name, which one runs depends on load order. One can quietly shadow the other.'
             : 'Names this close are easy to confuse for a reviewer and for the model, and are a common sign of a copied or shadowing tool.',
           fix: 'Prefix tool names with their server (billing_issue_refund) and keep an allow-list of the exact tools each agent may call.',
-          refs: [{ standard: LLM_RISK.supply, course: COURSE.mcp }],
+          refs: [{ standard: LLM_RISK.supply }],
         }));
       }
     }
@@ -297,7 +296,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         evidence: `${h.count} hidden code point${h.count > 1 ? 's' : ''}: ${h.codes.slice(0, 6).join(', ')}`,
         detail: 'Agents and tool generators turn these descriptions into tool text. Invisible characters reach the model without anyone seeing them.',
         fix: 'Strip invisible code points from the spec and add a CI check that fails on them.',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.exploitability }],
+        refs: [{ standard: LLM_RISK.injection }],
       }));
     }
     const d = directiveHits(t.text);
@@ -306,7 +305,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'SPEC-INSTRUCTION-TEXT', severity: 'medium', title: 'A description addresses an AI model', where: t.where, evidence: d[0].quote.slice(0, 160),
         detail: `The text ${d.map((x) => x.label).join('; ')}. When this spec is turned into agent tools, the sentence becomes an instruction.`,
         fix: 'Keep descriptions factual: what the operation does, who may call it and what it changes.',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }],
+        refs: [{ standard: LLM_RISK.injection }],
       }));
     }
   }
@@ -321,7 +320,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'LLM-INPUT-LIMIT', severity: 'medium', title: 'The prompt has no length limit', where, evidence: prompts.map((f) => f.path).slice(0, 3).join(', '),
         detail: 'Unbounded input lets one request fill the model\'s context, run up its cost and bury your own instructions under someone else\'s text.',
         fix: 'Set maxLength on prompt fields, enforce it on the server and count tokens before calling the model.',
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }],
+        refs: [{ standard: API_TOP10.API4 }],
       }));
     }
     const sys = req.filter((f) => SYSTEM_FIELD.test(f.name));
@@ -333,7 +332,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         evidence: sys.length ? sys.map((f) => f.path).join(', ') : `${roleField!.path} allows "system"`,
         detail: 'If the client sends the system prompt or a system-role message, every safety rule you wrote into it can be replaced by the caller.',
         fix: 'Keep the system prompt on the server. Accept only user messages from the client and restrict role to "user".',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.llm }, { course: COURSE.buildingAi }],
+        refs: [{ standard: LLM_RISK.injection }],
       }));
     }
     const model = req.filter((f) => MODEL_FIELD.test(f.name) && !f.enumValues);
@@ -343,7 +342,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'LLM-MODEL-CHOICE', severity: 'medium', title: 'The caller picks the model or the output size', where, evidence: [...model, ...tokens].map((f) => f.path).join(', '),
         detail: 'A free choice of model or max_tokens lets a caller pick the most expensive option every time.',
         fix: 'Choose the model on the server, or limit it with an enum, and set a maximum on token counts.',
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }],
+        refs: [{ standard: API_TOP10.API4 }],
       }));
     }
     const pii = req.filter((f) => PII_FIELD.test(f.name));
@@ -352,7 +351,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'LLM-PII-IN', severity: 'medium', title: 'Personal data is sent to the model', where, evidence: pii.map((f) => f.path).slice(0, 4).join(', '),
         detail: 'Personal fields sent to a model provider may be logged, retained or used outside your control, and can come back in another user\'s answer.',
         fix: 'Send ids instead of personal data, redact or pseudonymise before the call, and check the provider\'s retention terms.',
-        refs: [{ standard: LLM_RISK.disclosure, course: COURSE.llm }],
+        refs: [{ standard: LLM_RISK.disclosure }],
       }));
     }
     if (!documentsLimit(op)) {
@@ -360,7 +359,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'LLM-COST-LIMIT', severity: 'high', title: 'An AI endpoint shows no rate or spend limit', where,
         detail: 'Every call costs money at the model provider. Without a limit, one script can run up the bill or starve other users.',
         fix: 'Rate-limit per user, set a daily token or spend budget, return 429 when it is reached and document it.',
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }],
+        refs: [{ standard: API_TOP10.API4 }],
       }));
     }
     const render = op.responseFields.filter((f) => RENDER_FIELD.test(f.name) || f.format === 'html');
@@ -369,7 +368,7 @@ export function checkAiSurface(api: ApiModel): Finding[] {
         rule: 'LLM-RAW-OUTPUT', severity: 'medium', title: 'Model output is returned ready to render', where, evidence: render.map((f) => f.path).join(', '),
         detail: 'Model output can contain markup, links and images it copied from what it read. Rendered as-is, it can run script or load content from other hosts.',
         fix: 'Return plain text, escape it before rendering, and drop links and images to hosts you have not allow-listed.',
-        refs: [{ standard: LLM_RISK.output, course: COURSE.buildingAi }],
+        refs: [{ standard: LLM_RISK.output }],
       }));
     }
   }
@@ -384,19 +383,18 @@ export interface Safeguard {
   label: string;
   why: string;
   severity: Severity;
-  course: string;
   standard?: string;
 }
 
 export const SAFEGUARDS: Safeguard[] = [
-  { id: 'approval', title: 'No confirmation before high-impact actions', label: 'Actions that move money, delete data or change access wait for a person to confirm.', why: 'An agent acts on text it has read; a confirmation step stops one misread instruction from becoming a real action.', severity: 'high', course: COURSE.buildingAi, standard: LLM_RISK.agency },
-  { id: 'identity', title: "The agent uses a shared key, not the user's token", label: 'The agent calls the API with the signed-in user\'s own token, never a shared service key.', why: 'With a shared key the API cannot tell users apart, so every ownership check passes.', severity: 'high', course: COURSE.auth, standard: API_TOP10.API1 },
-  { id: 'scopes', title: "The agent's token is broader than its tools", label: 'The agent\'s token holds only the scopes its tools need.', why: 'Least privilege limits what a misled agent can reach.', severity: 'medium', course: COURSE.auth, standard: API_TOP10.API5 },
-  { id: 'log', title: 'Tool calls are not fully logged', label: 'Every tool call is logged with user, tool, arguments, result, time and conversation id.', why: 'Without these six fields you cannot answer "who did this, and why" after an incident.', severity: 'medium', course: COURSE.devsecops },
-  { id: 'pinned', title: 'Tool versions are not pinned or reviewed', label: 'Tool servers are pinned to a reviewed version, and changed tool text is reviewed before release.', why: 'A tool definition is code the model reads; an unreviewed update can change what the agent does.', severity: 'medium', course: COURSE.mcp, standard: LLM_RISK.supply },
-  { id: 'egress', title: 'Outbound hosts are not restricted', label: 'The agent reaches only allow-listed hosts, and its answers cannot load links or images from other hosts.', why: 'Outbound links and images are how data leaves a conversation.', severity: 'high', course: COURSE.exploitability, standard: LLM_RISK.output },
-  { id: 'untrusted', title: 'Outside content is not kept apart from instructions', label: 'Documents, emails and web pages the agent reads are handled as data, kept apart from its instructions.', why: 'Content from outside is the main way unwanted instructions reach a model.', severity: 'high', course: COURSE.exploitability, standard: LLM_RISK.injection },
-  { id: 'limits', title: 'No per-user limits on agent use', label: 'Each user has limits on tool calls, tokens and spend per day.', why: 'Limits cap the damage of a loop, a bug or abuse.', severity: 'medium', course: COURSE.llm, standard: API_TOP10.API4 },
+  { id: 'approval', title: 'No confirmation before high-impact actions', label: 'Actions that move money, delete data or change access wait for a person to confirm.', why: 'An agent acts on text it has read; a confirmation step stops one misread instruction from becoming a real action.', severity: 'high', standard: LLM_RISK.agency },
+  { id: 'identity', title: "The agent uses a shared key, not the user's token", label: 'The agent calls the API with the signed-in user\'s own token, never a shared service key.', why: 'With a shared key the API cannot tell users apart, so every ownership check passes.', severity: 'high', standard: API_TOP10.API1 },
+  { id: 'scopes', title: "The agent's token is broader than its tools", label: 'The agent\'s token holds only the scopes its tools need.', why: 'Least privilege limits what a misled agent can reach.', severity: 'medium', standard: API_TOP10.API5 },
+  { id: 'log', title: 'Tool calls are not fully logged', label: 'Every tool call is logged with user, tool, arguments, result, time and conversation id.', why: 'Without these six fields you cannot answer "who did this, and why" after an incident.', severity: 'medium' },
+  { id: 'pinned', title: 'Tool versions are not pinned or reviewed', label: 'Tool servers are pinned to a reviewed version, and changed tool text is reviewed before release.', why: 'A tool definition is code the model reads; an unreviewed update can change what the agent does.', severity: 'medium', standard: LLM_RISK.supply },
+  { id: 'egress', title: 'Outbound hosts are not restricted', label: 'The agent reaches only allow-listed hosts, and its answers cannot load links or images from other hosts.', why: 'Outbound links and images are how data leaves a conversation.', severity: 'high', standard: LLM_RISK.output },
+  { id: 'untrusted', title: 'Outside content is not kept apart from instructions', label: 'Documents, emails and web pages the agent reads are handled as data, kept apart from its instructions.', why: 'Content from outside is the main way unwanted instructions reach a model.', severity: 'high', standard: LLM_RISK.injection },
+  { id: 'limits', title: 'No per-user limits on agent use', label: 'Each user has limits on tool calls, tokens and spend per day.', why: 'Limits cap the damage of a loop, a bug or abuse.', severity: 'medium', standard: API_TOP10.API4 },
 ];
 
 /** One finding per safeguard that is not in place. */
@@ -404,6 +402,6 @@ export function checkSafeguards(inPlace: Record<string, boolean>): Finding[] {
   return SAFEGUARDS.filter((s) => !inPlace[s.id]).map((s) => make({
     rule: `AGENT-${s.id.toUpperCase()}`, severity: s.severity, title: s.title,
     where: 'agent safeguards', detail: s.why, fix: s.label,
-    refs: [{ standard: s.standard, course: s.course }],
+    refs: s.standard ? [{ standard: s.standard }] : [],
   }));
 }

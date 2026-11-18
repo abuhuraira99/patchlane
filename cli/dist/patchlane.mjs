@@ -27,21 +27,6 @@ var FRAMEWORK_LABEL = {
 };
 
 // src/engine/refs.ts
-var COURSE = {
-  fundamentals: "API Security Fundamentals 2025",
-  owasp: "OWASP API Security Top 10 and Beyond",
-  auth: "API Authentication",
-  servers: "Securing API Servers",
-  docs: "API Documentation Best Practices",
-  pentestIntro: "Getting Started in API Pen-Testing",
-  pentest: "API Penetration Testing",
-  devsecops: "API Security in the World of DevSecOps",
-  startLeft: "Start Left: API SecDevOps",
-  mcp: "MCP Security Fundamentals",
-  llm: "Securing LLM & NLP APIs",
-  buildingAi: "Building Security into AI",
-  exploitability: "Foundations of AI-Based Application Exploitability"
-};
 var API_TOP10 = {
   API1: "API1:2023 Broken Object Level Authorization",
   API2: "API2:2023 Broken Authentication",
@@ -3555,7 +3540,7 @@ function checkApi(api) {
         where: `server ${s}`,
         detail: "Tokens and response data cross the network unencrypted, so anyone on the path can read or change them.",
         fix: "Serve only over HTTPS, redirect HTTP and send Strict-Transport-Security.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (NON_PROD_HOST.test(s.replace(/^https?:\/\//, "").split("/")[0])) {
@@ -3567,7 +3552,7 @@ function checkApi(api) {
         where: `server ${s}`,
         detail: "Staging and test hosts are often weaker than production and are easy to find once they appear in documentation.",
         fix: "Publish production servers only, and keep staging behind the same authentication and gateway rules as production.",
-        refs: [{ standard: API_TOP10.API9, course: COURSE.owasp }]
+        refs: [{ standard: API_TOP10.API9 }]
       }));
     }
   }
@@ -3580,7 +3565,7 @@ function checkApi(api) {
       where: "components.securitySchemes",
       detail: "Without a declared scheme, every operation reads as public and nobody can check which endpoints need a token.",
       fix: "Declare the scheme (OAuth 2.0, OpenID Connect or bearer tokens) and apply it globally, opening only the endpoints meant to be public.",
-      refs: [{ standard: API_TOP10.API2, course: COURSE.auth }]
+      refs: [{ standard: API_TOP10.API2 }]
     }));
   }
   for (const s of api.schemes) {
@@ -3593,7 +3578,7 @@ function checkApi(api) {
         where: `scheme ${s.name}`,
         detail: "Query strings end up in server logs, proxy logs, browser history and Referer headers, so the key leaks.",
         fix: "Send the key in a header, or move to short-lived OAuth 2.0 access tokens.",
-        refs: [{ standard: API_TOP10.API2, course: COURSE.auth }]
+        refs: [{ standard: API_TOP10.API2 }]
       }));
     }
     if (s.type === "http" && s.scheme === "basic") {
@@ -3605,7 +3590,7 @@ function checkApi(api) {
         where: `scheme ${s.name}`,
         detail: "The same long-lived secret crosses the wire on every request and cannot be scoped or expired.",
         fix: "Exchange the password once for a short-lived, scoped access token.",
-        refs: [{ standard: API_TOP10.API2, course: COURSE.auth }]
+        refs: [{ standard: API_TOP10.API2 }]
       }));
     }
     if (s.type === "apiKey" && s.in !== "query") {
@@ -3617,7 +3602,7 @@ function checkApi(api) {
         where: `scheme ${s.name}`,
         detail: "API keys are shared, copied and rarely rotated; they say which app is calling, not which user.",
         fix: "Use per-user OAuth 2.0 tokens for user data, keep keys for app identification, and rotate them on a schedule.",
-        refs: [{ standard: API_TOP10.API2, course: COURSE.startLeft }]
+        refs: [{ standard: API_TOP10.API2 }]
       }));
     }
     for (const [flow, def] of Object.entries(s.flows ?? {})) {
@@ -3630,7 +3615,7 @@ function checkApi(api) {
           where: `scheme ${s.name}`,
           detail: "The implicit flow returns the access token in the URL fragment, where browser history and scripts can read it. OAuth 2.0 security guidance has deprecated it.",
           fix: "Use the authorization code flow with PKCE.",
-          refs: [{ standard: API_TOP10.API2, course: COURSE.auth }]
+          refs: [{ standard: API_TOP10.API2 }]
         }));
       }
       if (flow === "password") {
@@ -3642,7 +3627,7 @@ function checkApi(api) {
           where: `scheme ${s.name}`,
           detail: "The client handles the user's password directly, which defeats the point of delegated authorization.",
           fix: "Use the authorization code flow with PKCE for users and client credentials for services.",
-          refs: [{ standard: API_TOP10.API2, course: COURSE.auth }]
+          refs: [{ standard: API_TOP10.API2 }]
         }));
       }
       const scopes2 = Object.keys(def?.scopes ?? {});
@@ -3657,7 +3642,7 @@ function checkApi(api) {
           evidence: broad.join(", "),
           detail: "A token with an all-powerful scope turns any single leak into full access, and an agent holding it can do anything the API allows.",
           fix: "Split scopes by resource and action (accounts:read, refunds:write) and give each client only what it needs.",
-          refs: [{ standard: API_TOP10.API5, course: COURSE.auth }]
+          refs: [{ standard: API_TOP10.API5 }]
         }));
       }
     }
@@ -3688,7 +3673,7 @@ function checkApi(api) {
         where,
         detail: write2 ? "Anyone on the internet can call this and change data. No security requirement applies to it." : "No security requirement applies, so anyone can call it. Confirm it is meant to be public.",
         fix: "Apply the API's security scheme to this operation, or document why it is public.",
-        refs: [{ standard: API_TOP10.API2, course: COURSE.owasp }]
+        refs: [{ standard: API_TOP10.API2 }]
       }));
     }
     const ids = [...pathIds, ...queryIds];
@@ -3704,7 +3689,7 @@ function checkApi(api) {
         evidence: [...new Set(names)].join(", "),
         detail: `The request names the object by ${[...new Set(names)].join(", ")}. Unless the server checks that this object belongs to the signed-in user, any user (or an agent acting for one) can read or change someone else's.${numeric ? " The id is a number, so neighbouring ids are easy to guess." : ""}`,
         fix: "Check ownership on the server for every request, using the identity in the token, never an id the client sends. Return 404 for objects the caller does not own.",
-        refs: [{ standard: API_TOP10.API1, course: COURSE.owasp }, { course: COURSE.startLeft }]
+        refs: [{ standard: API_TOP10.API1 }]
       }));
     }
     const leaks = op.responseFields.filter((x) => SENSITIVE_OUT.test(x.name) && !x.writeOnly);
@@ -3718,7 +3703,7 @@ function checkApi(api) {
         evidence: fieldList(leaks),
         detail: `The response schema includes ${fieldList(leaks)}. Clients and agents receive more than they show, and an agent may repeat it in an answer.`,
         fix: "Remove these fields from the response model, or mark them writeOnly. Return only the fields the client displays.",
-        refs: [{ standard: API_TOP10.API3, course: COURSE.owasp }, { course: COURSE.startLeft }]
+        refs: [{ standard: API_TOP10.API3 }]
       }));
     }
     if (write2 && op.method !== "delete") {
@@ -3733,7 +3718,7 @@ function checkApi(api) {
           evidence: fieldList(priv),
           detail: `Callers may send ${fieldList(priv)}. If the server binds the body straight onto its model, a user can raise their own role, limit or balance.`,
           fix: "Accept an explicit allow-list of fields per operation; mark server-owned fields readOnly and ignore them on input.",
-          refs: [{ standard: API_TOP10.API3, course: COURSE.pentest }]
+          refs: [{ standard: API_TOP10.API3 }]
         }));
       }
       if (op.requestAdditionalProps === true && op.requestFields.length) {
@@ -3745,7 +3730,7 @@ function checkApi(api) {
           where,
           detail: "additionalProperties is not false, so extra fields pass schema validation and reach the server.",
           fix: "Set additionalProperties: false on request bodies and validate against the schema at the gateway.",
-          refs: [{ standard: API_TOP10.API3, course: COURSE.pentest }]
+          refs: [{ standard: API_TOP10.API3 }]
         }));
       }
     }
@@ -3760,7 +3745,7 @@ function checkApi(api) {
           where,
           detail: "Without paging, one call can ask for every record, which is slow for the server and a fast way to copy data out.",
           fix: "Add a limit parameter with a documented maximum and paginate by cursor.",
-          refs: [{ standard: API_TOP10.API4, course: COURSE.owasp }]
+          refs: [{ standard: API_TOP10.API4 }]
         }));
       } else if (paging.every((p) => p.maximum === void 0)) {
         out.push(f({
@@ -3772,7 +3757,7 @@ function checkApi(api) {
           evidence: paging.map((p) => p.name).join(", "),
           detail: "Callers choose the page size freely, so limit=1000000 returns everything at once.",
           fix: "Declare a maximum on the parameter and enforce it on the server.",
-          refs: [{ standard: API_TOP10.API4, course: COURSE.owasp }]
+          refs: [{ standard: API_TOP10.API4 }]
         }));
       }
     }
@@ -3785,7 +3770,7 @@ function checkApi(api) {
         where,
         detail: "File uploads without limits let one caller fill storage or send a file type the parser should never see.",
         fix: "Document and enforce the maximum size and the accepted content types; scan uploads before processing.",
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }]
+        refs: [{ standard: API_TOP10.API4 }]
       }));
     }
     if (login && (op.method === "post" || op.method === "put") && !documentsLimit(op)) {
@@ -3797,7 +3782,7 @@ function checkApi(api) {
         where,
         detail: "Credential endpoints without a limit allow password spraying and brute force against one account.",
         fix: "Limit attempts per account and per IP, return 429 with Retry-After, and document it in the spec.",
-        refs: [{ standard: API_TOP10.API2, course: COURSE.pentest }]
+        refs: [{ standard: API_TOP10.API2 }]
       }));
     }
     if (ADMIN_PATH.test(op.path)) {
@@ -3810,7 +3795,7 @@ function checkApi(api) {
         where,
         detail: scopes2.length ? `It requires ${scopes2.join(", ")}. Verify that ordinary users can never hold that scope.` : "It requires no special scope, so the only thing between a normal user and this function is the URL.",
         fix: "Require a dedicated admin role or scope, deny by default, and test the call with an ordinary user token.",
-        refs: [{ standard: API_TOP10.API5, course: COURSE.owasp }]
+        refs: [{ standard: API_TOP10.API5 }]
       }));
     }
     const flowText = `${op.path} ${op.operationId ?? ""}`;
@@ -3826,7 +3811,7 @@ function checkApi(api) {
           where,
           detail: `${!limited ? "No rate or volume limit is documented. " : ""}${!idem ? "No idempotency key is accepted, so a retried or replayed call repeats the action. " : ""}Flows like this are abused by repeating them, not by breaking them.`,
           fix: "Cap the flow per user per day in code, require an Idempotency-Key header, and alert on unusual volume.",
-          refs: [{ standard: API_TOP10.API6, course: COURSE.owasp }, { course: COURSE.fundamentals }]
+          refs: [{ standard: API_TOP10.API6 }]
         }));
       }
     }
@@ -3844,7 +3829,7 @@ function checkApi(api) {
         evidence: urlParams.map((p) => p.name).join(", "),
         detail: "If the server fetches this URL, a caller can point it at internal addresses such as cloud metadata services or admin panels.",
         fix: "Allow-list the hosts and schemes the server may fetch, block private and link-local ranges after DNS resolution, and never return the raw response.",
-        refs: [{ standard: API_TOP10.API7, course: COURSE.pentest }]
+        refs: [{ standard: API_TOP10.API7 }]
       }));
     }
     const leaky = op.errorFields.filter((x) => ERROR_LEAK.test(x.name));
@@ -3858,7 +3843,7 @@ function checkApi(api) {
         evidence: fieldList(leaky),
         detail: "Stack traces, SQL and file paths in errors give an attacker a map of the server.",
         fix: "Return a stable error code and a short message; keep detail in server logs under a correlation id.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (op.method === "post" && op.responseCodes.includes("409")) {
@@ -3870,7 +3855,7 @@ function checkApi(api) {
         where,
         detail: "On sign-up or create, 409 confirms that an email or name is already taken, which helps enumeration.",
         fix: "Consider 422 with a neutral message, and write the choice into your API standards.",
-        refs: [{ course: COURSE.startLeft }]
+        refs: []
       }));
     }
     if (op.deprecated) {
@@ -3882,7 +3867,7 @@ function checkApi(api) {
         where,
         detail: "Deprecated endpoints keep their old behaviour and often miss the fixes the new version got.",
         fix: "Publish a removal date (Sunset header), then remove the endpoint from the gateway, not only from the docs.",
-        refs: [{ standard: API_TOP10.API9, course: COURSE.startLeft }]
+        refs: [{ standard: API_TOP10.API9 }]
       }));
     }
     if (op.callbacks) {
@@ -3894,7 +3879,7 @@ function checkApi(api) {
         where,
         detail: "Data sent to or received from third parties is trusted less carefully than your own.",
         fix: "Sign callbacks, validate everything that comes back, and set timeouts and size limits.",
-        refs: [{ standard: API_TOP10.API10, course: COURSE.owasp }]
+        refs: [{ standard: API_TOP10.API10 }]
       }));
     }
     if (!op.summary && !op.description) undocumented++;
@@ -3911,7 +3896,7 @@ function checkApi(api) {
         where: `${rest || "/"} (v${sorted.join(", v")})`,
         detail: `Version ${sorted.slice(0, -1).map((v) => "v" + v).join(", ")} is still published beside v${sorted[sorted.length - 1]}. A fix made in the new version does nothing while the old one answers.`,
         fix: "Set a removal date, tell registered consumers, then return 404 for the old version at the gateway.",
-        refs: [{ standard: API_TOP10.API9, course: COURSE.devsecops }]
+        refs: [{ standard: API_TOP10.API9 }]
       }));
     }
   }
@@ -3925,7 +3910,7 @@ function checkApi(api) {
       where: "whole API",
       detail: "No 429 response, rate-limit extension or limit note appears anywhere in the spec.",
       fix: "Rate-limit at the gateway per token and per IP, document the limits, and return 429 with Retry-After.",
-      refs: [{ standard: API_TOP10.API4, course: COURSE.servers }]
+      refs: [{ standard: API_TOP10.API4 }]
     }));
   }
   if (ops.length && undocumented / ops.length > 0.2) {
@@ -3937,7 +3922,7 @@ function checkApi(api) {
       where: "whole API",
       detail: "Undocumented operations are the ones nobody reviews, and an agent picks tools by these descriptions.",
       fix: "Give every operation a one-line summary and a description of who may call it and what it changes.",
-      refs: [{ course: COURSE.docs }]
+      refs: [{ standard: API_TOP10.API9 }]
     }));
   }
   if (ops.length && noErrors / ops.length > 0.3) {
@@ -3949,7 +3934,7 @@ function checkApi(api) {
       where: "whole API",
       detail: "Without documented errors, clients guess, and testers cannot tell a correct refusal from a bug.",
       fix: "Document 400, 401 or 404, 403 where used, 422 and 429 with one shared error schema.",
-      refs: [{ course: COURSE.docs }]
+      refs: [{ standard: API_TOP10.API9 }]
     }));
   }
   if (!api.description) {
@@ -3961,7 +3946,7 @@ function checkApi(api) {
       where: "info.description",
       detail: "Concept documentation (what the API is for, how auth works, the main flows) is missing.",
       fix: "Add an overview to info.description covering purpose, authentication, rate limits and versioning.",
-      refs: [{ course: COURSE.docs }]
+      refs: [{ standard: API_TOP10.API9 }]
     }));
   }
   if (!api.hasContact) {
@@ -3973,7 +3958,7 @@ function checkApi(api) {
       where: "info.contact",
       detail: "An API with no owner in its inventory entry is the one that stays live after everyone has forgotten it.",
       fix: "Add info.contact with the owning team.",
-      refs: [{ standard: API_TOP10.API9, course: COURSE.devsecops }]
+      refs: [{ standard: API_TOP10.API9 }]
     }));
   }
   return out;
@@ -4057,7 +4042,7 @@ function checkResponse(text, opts = {}) {
         evidence: `Access-Control-Allow-Origin: * and Access-Control-Allow-Credentials: true`,
         detail: 'Browsers refuse this pair, which usually means the server was set up to reflect origins to make it "work".',
         fix: "List the exact origins that may call the API with credentials; never combine * with credentials.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     } else if (acao === "*") {
       out.push(f2({
@@ -4068,7 +4053,7 @@ function checkResponse(text, opts = {}) {
         evidence: "*",
         detail: "Any website can read this response from a visitor's browser. That is fine for public data and wrong for anything personal.",
         fix: "Keep * only on public, unauthenticated endpoints; allow-list origins everywhere else.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (acao.toLowerCase() === "null") {
@@ -4080,7 +4065,7 @@ function checkResponse(text, opts = {}) {
         evidence: "null",
         detail: "Sandboxed frames and local files send Origin: null, so allowing it lets pages you do not control read the response.",
         fix: "Remove null from the allowed origins.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (opts.testOrigin && acao === opts.testOrigin.trim()) {
@@ -4092,7 +4077,7 @@ function checkResponse(text, opts = {}) {
         evidence: `${opts.testOrigin} was allowed${acac ? " with credentials" : ""}`,
         detail: "The server copies the request's Origin into the response, so every website is treated as trusted.",
         fix: "Compare the Origin against a fixed allow-list and send Vary: Origin; do not copy it.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (acao !== "*" && !/origin/i.test(get(r, "vary") ?? "")) {
@@ -4103,7 +4088,7 @@ function checkResponse(text, opts = {}) {
         where: "Vary",
         detail: "Caches may serve one origin's CORS answer to another.",
         fix: "Add Vary: Origin whenever Access-Control-Allow-Origin depends on the request.",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4117,7 +4102,7 @@ function checkResponse(text, opts = {}) {
       evidence: methods,
       detail: "Allowing every method across origins widens what another site can ask a browser to do.",
       fix: "Allow only the methods each route uses.",
-      refs: [{ course: COURSE.servers }]
+      refs: [{ standard: API_TOP10.API8 }]
     }));
   }
   for (const c2 of all(r, "set-cookie")) {
@@ -4138,7 +4123,7 @@ function checkResponse(text, opts = {}) {
         evidence: c2.slice(0, 120),
         detail: `${missing.includes("Secure") ? "Without Secure it can travel over plain HTTP. " : ""}${missing.includes("HttpOnly") ? "Without HttpOnly any script on the page can read it. " : ""}${missing.includes("SameSite") ? "Without SameSite the browser sends it on cross-site requests. " : ""}`.trim(),
         fix: "Set Secure; HttpOnly; SameSite=Lax (or Strict) on session cookies, plus a Path and a short Max-Age.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
     if (ss === "none" && !/;\s*secure/.test(lower)) {
@@ -4149,7 +4134,7 @@ function checkResponse(text, opts = {}) {
         where: "Set-Cookie",
         detail: "Browsers reject this combination, and it signals the cookie is meant to cross sites.",
         fix: "Use SameSite=Lax unless a cross-site flow needs None, and then always add Secure.",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4162,7 +4147,7 @@ function checkResponse(text, opts = {}) {
       where: "response headers",
       detail: "Without HSTS a browser may still try plain HTTP first, where the connection can be intercepted.",
       fix: "Send Strict-Transport-Security: max-age=31536000; includeSubDomains over HTTPS.",
-      refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+      refs: [{ standard: API_TOP10.API8 }]
     }));
   } else {
     const age = Number(hsts.match(/max-age=(\d+)/i)?.[1] ?? 0);
@@ -4175,7 +4160,7 @@ function checkResponse(text, opts = {}) {
         evidence: hsts,
         detail: "A short max-age lets the protection lapse between visits.",
         fix: "Use max-age=31536000 (one year) once HTTPS is stable.",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4187,7 +4172,7 @@ function checkResponse(text, opts = {}) {
       where: "response headers",
       detail: "Browsers may guess the content type and run a JSON or text response as script or HTML.",
       fix: "Send X-Content-Type-Options: nosniff on every response.",
-      refs: [{ course: COURSE.servers }]
+      refs: [{ standard: API_TOP10.API8 }]
     }));
   }
   if (isHtml) {
@@ -4200,7 +4185,7 @@ function checkResponse(text, opts = {}) {
         where: "response headers",
         detail: "Without a CSP, any injected script runs with the page's full rights.",
         fix: "Start with default-src 'self'; frame-ancestors 'none'; object-src 'none' and loosen only what the page needs.",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     } else {
       const directives = new Map(csp.split(";").map((d) => d.trim().split(/\s+/)).filter((d) => d[0]).map((d) => [d[0].toLowerCase(), d.slice(1)]));
@@ -4216,7 +4201,7 @@ function checkResponse(text, opts = {}) {
           evidence: `${directives.has("script-src") ? "script-src" : "default-src"} ${weak.join(" ")}`,
           detail: "Inline and eval allowances undo most of the protection a CSP gives.",
           fix: "Move inline scripts to files or use nonces, then drop the unsafe keywords.",
-          refs: [{ course: COURSE.servers }]
+          refs: [{ standard: API_TOP10.API8 }]
         }));
       }
     }
@@ -4228,7 +4213,7 @@ function checkResponse(text, opts = {}) {
         where: "response headers",
         detail: "Without frame-ancestors or X-Frame-Options another site can load the page invisibly and trick clicks on it.",
         fix: "Send Content-Security-Policy: frame-ancestors 'none' (or 'self').",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4243,7 +4228,7 @@ function checkResponse(text, opts = {}) {
         evidence: cc || "(none)",
         detail: "Shared caches and proxies can keep personal data and hand it to the next person.",
         fix: "Send Cache-Control: no-store on responses that contain personal or account data.",
-        refs: [{ course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4258,7 +4243,7 @@ function checkResponse(text, opts = {}) {
         evidence: `${n}: ${v}`,
         detail: "Version banners tell anyone which known vulnerabilities to look up.",
         fix: `Remove ${n} or reduce it to a generic value at the proxy.`,
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4274,7 +4259,7 @@ function checkResponse(text, opts = {}) {
         evidence: (head.match(hit)?.[0] ?? "").slice(0, 120),
         detail: "Internal errors reveal the language, libraries, file layout and sometimes the query, which narrows down what to try next.",
         fix: "Catch errors at one handler, return a short message with a correlation id, and log the detail on the server only.",
-        refs: [{ standard: API_TOP10.API8, course: COURSE.servers }]
+        refs: [{ standard: API_TOP10.API8 }]
       }));
     }
   }
@@ -4287,7 +4272,7 @@ function checkResponse(text, opts = {}) {
       where: "response headers",
       detail: "The response does not show a limit. One may exist; if it does, telling clients helps them back off.",
       fix: "Send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (or the X- versions), and 429 with Retry-After.",
-      refs: [{ standard: API_TOP10.API4, course: COURSE.servers }]
+      refs: [{ standard: API_TOP10.API4 }]
     }));
   }
   if (r.status === 401 || r.status === 403) {
@@ -4298,7 +4283,7 @@ function checkResponse(text, opts = {}) {
       where: `HTTP ${r.status}`,
       detail: "For objects the caller may not see, 404 reveals less than 401 or 403.",
       fix: "Pick one rule for your API standard and apply it everywhere.",
-      refs: [{ course: COURSE.startLeft }]
+      refs: []
     }));
   }
   return out;
@@ -4335,7 +4320,7 @@ function checkJwt(token, nowSeconds = Math.floor(Date.now() / 1e3)) {
   const decoded = decodeJwt(token);
   const { header, payload } = decoded;
   const out = [];
-  const ref = [{ standard: API_TOP10.API2, course: COURSE.auth }];
+  const ref = [{ standard: API_TOP10.API2 }];
   const push = (p) => out.push({ area: "token", refs: ref, ...p });
   const alg = String(header.alg ?? "");
   if (!alg || alg.toLowerCase() === "none" || !decoded.signaturePresent) {
@@ -4449,7 +4434,7 @@ function checkJwt(token, nowSeconds = Math.floor(Date.now() / 1e3)) {
       evidence: sensitive.join(", "),
       detail: "JWT claims are only encoded, not encrypted: anyone holding the token can read them.",
       fix: "Keep only identifiers and scopes in the token; look personal data up on the server.",
-      refs: [{ standard: API_TOP10.API3, course: COURSE.auth }]
+      refs: [{ standard: API_TOP10.API3 }]
     });
   }
   const scope = String(payload.scope ?? payload.scp ?? "");
@@ -4462,7 +4447,7 @@ function checkJwt(token, nowSeconds = Math.floor(Date.now() / 1e3)) {
       evidence: scope.slice(0, 80),
       detail: "One leaked token with a broad scope opens every endpoint.",
       fix: "Issue the narrowest scopes each client needs.",
-      refs: [{ standard: API_TOP10.API5, course: COURSE.auth }]
+      refs: [{ standard: API_TOP10.API5 }]
     });
   }
   return { decoded, findings: out };
@@ -4515,7 +4500,7 @@ function diffApis(before, after) {
   const raise = (x) => {
     if (RANK[x] > RANK[need]) need = x;
   };
-  const ref = (s) => [{ standard: s, course: COURSE.startLeft }];
+  const ref = (s) => s ? [{ standard: s }] : [];
   if (removed.length) {
     raise("major");
     for (const k of removed) {
@@ -4527,7 +4512,7 @@ function diffApis(before, after) {
         where: k,
         detail: "Clients that still call it will break. This is a breaking change.",
         fix: "Deprecate first with a removal date, then remove in a major version.",
-        refs: ref()
+        refs: ref(API_TOP10.API9)
       });
     }
   }
@@ -4638,7 +4623,7 @@ function diffApis(before, after) {
         evidence: newRequired.map((p) => p.name).join(", "),
         detail: "Existing clients do not send it and will start failing.",
         fix: "Make it optional with a default, or ship it in a major version.",
-        refs: ref()
+        refs: ref(API_TOP10.API9)
       });
     }
     const respB = new Set(nb.responseFields.map((f3) => f3.path));
@@ -4655,7 +4640,7 @@ function diffApis(before, after) {
         evidence: goneFields.slice(0, 4).map((f3) => f3.path).join(", "),
         detail: "Clients that read these fields will break.",
         fix: "Keep them (deprecated) until the next major version.",
-        refs: ref()
+        refs: ref(API_TOP10.API9)
       });
     }
     const addedOptional = nb.params.filter((p) => !p.required && !na.params.some((q) => q.name === p.name && q.in === p.in));
@@ -4682,7 +4667,7 @@ function diffApis(before, after) {
       where: `info.version ${before.version} \u2192 ${after.version}`,
       detail: `The changes call for a ${need} bump, but the version ${db === "unknown" ? "could not be read as MAJOR.MINOR.PATCH" : db === "none" ? "did not change" : `only moved by a ${db}`}.`,
       fix: need === "major" ? "Raise the major number, or keep the old behaviour alongside the new until the next major release." : `Raise the ${need} number.`,
-      refs: ref()
+      refs: ref(API_TOP10.API9)
     });
   }
   return { added, removed, changed, findings, requiredBump: need, declared: { from: before.version, to: after.version, bump: db }, bumpOk };
@@ -4770,7 +4755,6 @@ var ID_PARAM = /^(user_?id|account_?id|customer_?id|tenant_?id|org(anization)?_?
 var SECRET_PARAM = /(password|passwd|secret|api_?key|apikey|access_?token|auth_?token|bearer|credential|private_?key)/i;
 function checkTools(tools) {
   const out = [];
-  const mcpRef = { course: COURSE.mcp };
   for (const t of tools) {
     const where = `tool ${t.name}`;
     const w = words(t.name);
@@ -4788,7 +4772,7 @@ ${t.scanText}`);
         evidence: `${hidden.count} hidden code point${hidden.count > 1 ? "s" : ""}: ${hidden.codes.slice(0, 6).join(", ")}`,
         detail: "Zero-width, direction-override or tag characters do not show in a review tool but the model still reads them. A definition that carries them cannot be reviewed by eye.",
         fix: "Remove every invisible code point from names, descriptions and schemas, and fail CI when a tool definition contains one.",
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }, { course: COURSE.exploitability }]
+        refs: [{ standard: LLM_RISK.injection }]
       }));
     }
     const hits = directiveHits(t.scanText);
@@ -4801,7 +4785,7 @@ ${t.scanText}`);
         evidence: hits[0].quote.slice(0, 160),
         detail: `The text ${hits.map((h) => h.label).join("; ")}. A tool description should only say what the tool does and what its inputs mean; anything else is an instruction the model may follow.`,
         fix: "Rewrite the description as a plain statement of what the tool does. Review every change to tool text before it ships, as you would review code.",
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }, { standard: LLM_RISK.supply, course: COURSE.exploitability }]
+        refs: [{ standard: LLM_RISK.injection }, { standard: LLM_RISK.supply }]
       }));
     }
     if (highImpact && !declaredReadOnly) {
@@ -4813,7 +4797,7 @@ ${t.scanText}`);
         evidence: verb ?? (t.annotations.destructiveHint ? "destructiveHint: true" : void 0),
         detail: "A model can call this tool on the strength of text it has read in a document, an email or a web page. Without a person in the loop, one misread instruction becomes a real action.",
         fix: "Have the server hold the action as pending and execute it only after the signed-in user confirms. Cap how often it can run per user per day.",
-        refs: [{ standard: LLM_RISK.agency, course: COURSE.buildingAi }, { course: COURSE.exploitability }]
+        refs: [{ standard: LLM_RISK.agency }]
       }));
     }
     if (t.source === "mcp" && verb && t.annotations.readOnlyHint === void 0 && t.annotations.destructiveHint === void 0) {
@@ -4825,7 +4809,7 @@ ${t.scanText}`);
         evidence: verb,
         detail: "MCP clients use readOnlyHint and destructiveHint to decide when to ask the user first. Without them the client has to guess.",
         fix: "Set readOnlyHint: false and destructiveHint: true (or false) on every tool that writes, and readOnlyHint: true on the ones that only read.",
-        refs: [mcpRef]
+        refs: [{ standard: LLM_RISK.agency }]
       }));
     }
     for (const p of t.params) {
@@ -4838,7 +4822,7 @@ ${t.scanText}`);
           evidence: p.name,
           detail: "Whatever the model writes into this parameter runs as code or as a query. The tool can do anything the server can.",
           fix: "Replace it with narrow tools that each take typed values (an order id, a date range) and build the query on the server.",
-          refs: [{ standard: LLM_RISK.agency, course: COURSE.mcp }, { course: COURSE.exploitability }]
+          refs: [{ standard: LLM_RISK.agency }]
         }));
       }
       if (URL_PARAM.test(p.name) || /\b(url|uri)\b/i.test(p.description ?? "") && p.type === "string" && /fetch|download|request|load/i.test(`${t.description} ${p.description}`)) {
@@ -4850,7 +4834,7 @@ ${t.scanText}`);
           evidence: p.name,
           detail: "If the server fetches it, the model (or text it read) can point the server at internal addresses or send data to an outside host.",
           fix: "Allow-list the hosts this tool may reach, block private and link-local ranges after DNS resolution, and never return the raw response.",
-          refs: [{ standard: API_TOP10.API7, course: COURSE.mcp }]
+          refs: [{ standard: API_TOP10.API7 }]
         }));
       }
       if (PATH_PARAM.test(p.name)) {
@@ -4862,7 +4846,7 @@ ${t.scanText}`);
           evidence: p.name,
           detail: "A path such as ../../.env reaches files outside the folder the tool was meant for.",
           fix: "Resolve the path against one fixed base folder and reject anything that resolves outside it; prefer file ids over paths.",
-          refs: [{ standard: API_TOP10.API8, course: COURSE.servers }, mcpRef]
+          refs: [{ standard: API_TOP10.API8 }]
         }));
       }
       if (ID_PARAM.test(p.name)) {
@@ -4874,7 +4858,7 @@ ${t.scanText}`);
           evidence: p.name,
           detail: "The tool takes the user or account as an argument, so a confused or misled model can act on someone else's records.",
           fix: "Take the identity from the signed-in session on the server, drop the parameter, and check ownership of every object.",
-          refs: [{ standard: API_TOP10.API1, course: COURSE.buildingAi }, mcpRef]
+          refs: [{ standard: API_TOP10.API1 }]
         }));
       }
       if (SECRET_PARAM.test(p.name)) {
@@ -4886,7 +4870,7 @@ ${t.scanText}`);
           evidence: p.name,
           detail: "The model has to hold this secret in its context to fill the parameter, where it can be logged, echoed in an answer or sent to another tool.",
           fix: "Inject credentials on the server side of the tool, from a secret store, and remove the parameter.",
-          refs: [{ standard: LLM_RISK.disclosure, course: COURSE.llm }, mcpRef]
+          refs: [{ standard: LLM_RISK.disclosure }]
         }));
       }
     }
@@ -4898,7 +4882,7 @@ ${t.scanText}`);
         where,
         detail: "additionalProperties is not false, so the model can pass fields the server never meant to receive.",
         fix: "Set additionalProperties: false, list required fields, and validate arguments on the server before acting.",
-        refs: [{ standard: API_TOP10.API3, course: COURSE.mcp }]
+        refs: [{ standard: API_TOP10.API3 }]
       }));
     }
     const undescribed = t.params.filter((p) => !p.description).length;
@@ -4911,7 +4895,7 @@ ${t.scanText}`);
         evidence: t.description.trim() ? `"${t.description.trim().slice(0, 60)}"` : "(no description)",
         detail: "A model picks tools and fills arguments from these words. Thin descriptions lead to wrong calls.",
         fix: "Say in one or two sentences what the tool does, what it changes and when not to use it; describe every parameter.",
-        refs: [{ course: COURSE.docs }, mcpRef]
+        refs: []
       }));
     }
     if (t.description.length > 1500) {
@@ -4923,7 +4907,7 @@ ${t.scanText}`);
         evidence: `${t.description.length} characters`,
         detail: "Very long descriptions cost context on every call and are where unwanted instructions are easiest to miss.",
         fix: "Keep descriptions under 500 characters and move usage notes to your own documentation.",
-        refs: [mcpRef]
+        refs: [{ standard: LLM_RISK.injection }]
       }));
     }
   }
@@ -4939,7 +4923,7 @@ ${t.scanText}`);
         where: `tool ${revealHidden(t.name)}`,
         detail: "Letters from another alphabet can make one tool look like another, so a reviewer approves the wrong one.",
         fix: "Restrict tool names to [a-z0-9_-] and reject anything else when servers register tools.",
-        refs: [{ standard: LLM_RISK.supply, course: COURSE.mcp }]
+        refs: [{ standard: LLM_RISK.supply }]
       }));
     }
   }
@@ -4961,7 +4945,7 @@ ${t.scanText}`);
           evidence: same ? a : `${a} / ${b}`,
           detail: same ? "When two servers register the same name, which one runs depends on load order. One can quietly shadow the other." : "Names this close are easy to confuse for a reviewer and for the model, and are a common sign of a copied or shadowing tool.",
           fix: "Prefix tool names with their server (billing_issue_refund) and keep an allow-list of the exact tools each agent may call.",
-          refs: [{ standard: LLM_RISK.supply, course: COURSE.mcp }]
+          refs: [{ standard: LLM_RISK.supply }]
         }));
       }
     }
@@ -4999,7 +4983,7 @@ function checkAiSurface(api) {
         evidence: `${h.count} hidden code point${h.count > 1 ? "s" : ""}: ${h.codes.slice(0, 6).join(", ")}`,
         detail: "Agents and tool generators turn these descriptions into tool text. Invisible characters reach the model without anyone seeing them.",
         fix: "Strip invisible code points from the spec and add a CI check that fails on them.",
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.exploitability }]
+        refs: [{ standard: LLM_RISK.injection }]
       }));
     }
     const d = directiveHits(t.text);
@@ -5012,7 +4996,7 @@ function checkAiSurface(api) {
         evidence: d[0].quote.slice(0, 160),
         detail: `The text ${d.map((x) => x.label).join("; ")}. When this spec is turned into agent tools, the sentence becomes an instruction.`,
         fix: "Keep descriptions factual: what the operation does, who may call it and what it changes.",
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.mcp }]
+        refs: [{ standard: LLM_RISK.injection }]
       }));
     }
   }
@@ -5029,7 +5013,7 @@ function checkAiSurface(api) {
         evidence: prompts.map((f3) => f3.path).slice(0, 3).join(", "),
         detail: "Unbounded input lets one request fill the model's context, run up its cost and bury your own instructions under someone else's text.",
         fix: "Set maxLength on prompt fields, enforce it on the server and count tokens before calling the model.",
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }]
+        refs: [{ standard: API_TOP10.API4 }]
       }));
     }
     const sys = req.filter((f3) => SYSTEM_FIELD.test(f3.name));
@@ -5044,7 +5028,7 @@ function checkAiSurface(api) {
         evidence: sys.length ? sys.map((f3) => f3.path).join(", ") : `${roleField.path} allows "system"`,
         detail: "If the client sends the system prompt or a system-role message, every safety rule you wrote into it can be replaced by the caller.",
         fix: 'Keep the system prompt on the server. Accept only user messages from the client and restrict role to "user".',
-        refs: [{ standard: LLM_RISK.injection, course: COURSE.llm }, { course: COURSE.buildingAi }]
+        refs: [{ standard: LLM_RISK.injection }]
       }));
     }
     const model = req.filter((f3) => MODEL_FIELD.test(f3.name) && !f3.enumValues);
@@ -5058,7 +5042,7 @@ function checkAiSurface(api) {
         evidence: [...model, ...tokens].map((f3) => f3.path).join(", "),
         detail: "A free choice of model or max_tokens lets a caller pick the most expensive option every time.",
         fix: "Choose the model on the server, or limit it with an enum, and set a maximum on token counts.",
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }]
+        refs: [{ standard: API_TOP10.API4 }]
       }));
     }
     const pii = req.filter((f3) => PII_FIELD.test(f3.name));
@@ -5071,7 +5055,7 @@ function checkAiSurface(api) {
         evidence: pii.map((f3) => f3.path).slice(0, 4).join(", "),
         detail: "Personal fields sent to a model provider may be logged, retained or used outside your control, and can come back in another user's answer.",
         fix: "Send ids instead of personal data, redact or pseudonymise before the call, and check the provider's retention terms.",
-        refs: [{ standard: LLM_RISK.disclosure, course: COURSE.llm }]
+        refs: [{ standard: LLM_RISK.disclosure }]
       }));
     }
     if (!documentsLimit2(op)) {
@@ -5082,7 +5066,7 @@ function checkAiSurface(api) {
         where,
         detail: "Every call costs money at the model provider. Without a limit, one script can run up the bill or starve other users.",
         fix: "Rate-limit per user, set a daily token or spend budget, return 429 when it is reached and document it.",
-        refs: [{ standard: API_TOP10.API4, course: COURSE.llm }]
+        refs: [{ standard: API_TOP10.API4 }]
       }));
     }
     const render = op.responseFields.filter((f3) => RENDER_FIELD.test(f3.name) || f3.format === "html");
@@ -5095,21 +5079,21 @@ function checkAiSurface(api) {
         evidence: render.map((f3) => f3.path).join(", "),
         detail: "Model output can contain markup, links and images it copied from what it read. Rendered as-is, it can run script or load content from other hosts.",
         fix: "Return plain text, escape it before rendering, and drop links and images to hosts you have not allow-listed.",
-        refs: [{ standard: LLM_RISK.output, course: COURSE.buildingAi }]
+        refs: [{ standard: LLM_RISK.output }]
       }));
     }
   }
   return out;
 }
 var SAFEGUARDS = [
-  { id: "approval", title: "No confirmation before high-impact actions", label: "Actions that move money, delete data or change access wait for a person to confirm.", why: "An agent acts on text it has read; a confirmation step stops one misread instruction from becoming a real action.", severity: "high", course: COURSE.buildingAi, standard: LLM_RISK.agency },
-  { id: "identity", title: "The agent uses a shared key, not the user's token", label: "The agent calls the API with the signed-in user's own token, never a shared service key.", why: "With a shared key the API cannot tell users apart, so every ownership check passes.", severity: "high", course: COURSE.auth, standard: API_TOP10.API1 },
-  { id: "scopes", title: "The agent's token is broader than its tools", label: "The agent's token holds only the scopes its tools need.", why: "Least privilege limits what a misled agent can reach.", severity: "medium", course: COURSE.auth, standard: API_TOP10.API5 },
-  { id: "log", title: "Tool calls are not fully logged", label: "Every tool call is logged with user, tool, arguments, result, time and conversation id.", why: 'Without these six fields you cannot answer "who did this, and why" after an incident.', severity: "medium", course: COURSE.devsecops },
-  { id: "pinned", title: "Tool versions are not pinned or reviewed", label: "Tool servers are pinned to a reviewed version, and changed tool text is reviewed before release.", why: "A tool definition is code the model reads; an unreviewed update can change what the agent does.", severity: "medium", course: COURSE.mcp, standard: LLM_RISK.supply },
-  { id: "egress", title: "Outbound hosts are not restricted", label: "The agent reaches only allow-listed hosts, and its answers cannot load links or images from other hosts.", why: "Outbound links and images are how data leaves a conversation.", severity: "high", course: COURSE.exploitability, standard: LLM_RISK.output },
-  { id: "untrusted", title: "Outside content is not kept apart from instructions", label: "Documents, emails and web pages the agent reads are handled as data, kept apart from its instructions.", why: "Content from outside is the main way unwanted instructions reach a model.", severity: "high", course: COURSE.exploitability, standard: LLM_RISK.injection },
-  { id: "limits", title: "No per-user limits on agent use", label: "Each user has limits on tool calls, tokens and spend per day.", why: "Limits cap the damage of a loop, a bug or abuse.", severity: "medium", course: COURSE.llm, standard: API_TOP10.API4 }
+  { id: "approval", title: "No confirmation before high-impact actions", label: "Actions that move money, delete data or change access wait for a person to confirm.", why: "An agent acts on text it has read; a confirmation step stops one misread instruction from becoming a real action.", severity: "high", standard: LLM_RISK.agency },
+  { id: "identity", title: "The agent uses a shared key, not the user's token", label: "The agent calls the API with the signed-in user's own token, never a shared service key.", why: "With a shared key the API cannot tell users apart, so every ownership check passes.", severity: "high", standard: API_TOP10.API1 },
+  { id: "scopes", title: "The agent's token is broader than its tools", label: "The agent's token holds only the scopes its tools need.", why: "Least privilege limits what a misled agent can reach.", severity: "medium", standard: API_TOP10.API5 },
+  { id: "log", title: "Tool calls are not fully logged", label: "Every tool call is logged with user, tool, arguments, result, time and conversation id.", why: 'Without these six fields you cannot answer "who did this, and why" after an incident.', severity: "medium" },
+  { id: "pinned", title: "Tool versions are not pinned or reviewed", label: "Tool servers are pinned to a reviewed version, and changed tool text is reviewed before release.", why: "A tool definition is code the model reads; an unreviewed update can change what the agent does.", severity: "medium", standard: LLM_RISK.supply },
+  { id: "egress", title: "Outbound hosts are not restricted", label: "The agent reaches only allow-listed hosts, and its answers cannot load links or images from other hosts.", why: "Outbound links and images are how data leaves a conversation.", severity: "high", standard: LLM_RISK.output },
+  { id: "untrusted", title: "Outside content is not kept apart from instructions", label: "Documents, emails and web pages the agent reads are handled as data, kept apart from its instructions.", why: "Content from outside is the main way unwanted instructions reach a model.", severity: "high", standard: LLM_RISK.injection },
+  { id: "limits", title: "No per-user limits on agent use", label: "Each user has limits on tool calls, tokens and spend per day.", why: "Limits cap the damage of a loop, a bug or abuse.", severity: "medium", standard: API_TOP10.API4 }
 ];
 function checkSafeguards(inPlace) {
   return SAFEGUARDS.filter((s) => !inPlace[s.id]).map((s) => make({
@@ -5119,7 +5103,7 @@ function checkSafeguards(inPlace) {
     where: "agent safeguards",
     detail: s.why,
     fix: s.label,
-    refs: [{ standard: s.standard, course: s.course }]
+    refs: s.standard ? [{ standard: s.standard }] : []
   }));
 }
 
@@ -8274,7 +8258,7 @@ function toMarkdown(report, framework) {
       L.push(`\`${f3.rule}\` \xB7 ${AREA_LABEL[f3.area]} \xB7 **${f3.where}**`, "");
       if (f3.evidence) L.push(`> ${f3.evidence}`, "");
       L.push(f3.detail, "", `**Fix.** ${f3.fix}`, "");
-      const refs = f3.refs.map((r) => [r.standard, r.course && `course: ${r.course}`].filter(Boolean).join(" \xB7 ")).filter(Boolean);
+      const refs = f3.refs.map((r) => r.standard).filter(Boolean);
       if (refs.length) L.push(`<sub>${refs.join(" | ")}</sub>`, "");
       if (framework) {
         const fx = fixFor(f3.rule, framework);

@@ -49,7 +49,7 @@ function render() {
   const q = norm(search.value.trim());
   let shown = 0;
   for (const area of ORDER) {
-    const list = entries.filter((e) => e.area === area && (!q || norm(`${e.rule} ${e.title} ${e.detail} ${e.fix} ${e.refs.map((r) => `${r.standard} ${r.course}`).join(' ')}`).includes(q)))
+    const list = entries.filter((e) => e.area === area && (!q || norm(`${e.rule} ${e.title} ${e.detail} ${e.fix} ${e.refs.map((r) => r.standard).join(' ')}`).includes(q)))
       .sort((a, b) => a.rule.localeCompare(b.rule, 'en', { numeric: true }));
     if (!list.length) continue;
     shown += list.length;
@@ -65,7 +65,7 @@ function render() {
         el('p', { class: 'rule__text' }, e.detail),
         el('p', { class: 'rule__fix' }, el('b', {}, 'Fix. '), e.fix),
         el('p', { class: 'rule__src' },
-          ...e.refs.filter((r) => r.standard || r.course).map((r) => el('span', {}, [r.standard, r.course && `APIsec University: ${r.course}`].filter(Boolean).join(' · '))),
+          ...e.refs.filter((r) => r.standard).map((r) => el('span', {}, r.standard!)),
           key ? el('span', { class: 'rule__code' }, `Fix code: ${FIX_TITLE[key]}, in 5 frameworks`) : null),
       ));
     }

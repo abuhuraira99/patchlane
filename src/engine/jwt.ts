@@ -1,5 +1,5 @@
 import type { Finding } from './types';
-import { API_TOP10, COURSE } from './refs';
+import { API_TOP10 } from './refs';
 
 // Decodes a JSON Web Token locally and reviews its header and claims, as taught in "API Authentication".
 // It never verifies or alters the signature and never sends the token anywhere.
@@ -35,7 +35,7 @@ export function checkJwt(token: string, nowSeconds = Math.floor(Date.now() / 100
   const decoded = decodeJwt(token);
   const { header, payload } = decoded;
   const out: Finding[] = [];
-  const ref = [{ standard: API_TOP10.API2, course: COURSE.auth }];
+  const ref = [{ standard: API_TOP10.API2 }];
   const push = (p: Omit<Finding, 'area' | 'refs'> & { refs?: Finding['refs'] }) => out.push({ area: 'token', refs: ref, ...p });
   const alg = String(header.alg ?? '');
 
@@ -94,13 +94,13 @@ export function checkJwt(token: string, nowSeconds = Math.floor(Date.now() / 100
     push({ rule: 'JWT-SENSITIVE-CLAIMS', severity: 'high', title: 'Personal or secret data is stored in the claims', where: 'payload', evidence: sensitive.join(', '),
       detail: 'JWT claims are only encoded, not encrypted: anyone holding the token can read them.',
       fix: 'Keep only identifiers and scopes in the token; look personal data up on the server.',
-      refs: [{ standard: API_TOP10.API3, course: COURSE.auth }] });
+      refs: [{ standard: API_TOP10.API3 }] });
   }
   const scope = String(payload.scope ?? payload.scp ?? '');
   if (/(^|\s)(\*|admin|all|full_access|root)(\s|$)/i.test(scope)) {
     push({ rule: 'JWT-BROAD-SCOPE', severity: 'medium', title: 'The token carries an all-powerful scope', where: 'payload.scope', evidence: scope.slice(0, 80),
       detail: 'One leaked token with a broad scope opens every endpoint.', fix: 'Issue the narrowest scopes each client needs.',
-      refs: [{ standard: API_TOP10.API5, course: COURSE.auth }] });
+      refs: [{ standard: API_TOP10.API5 }] });
   }
   return { decoded, findings: out };
 }

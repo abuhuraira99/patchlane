@@ -1,5 +1,5 @@
 // Writes docs/RULES.md from the engine itself: every rule the fixtures trigger, with its area, worst
-// severity, standard, course and fix family. Run: npx vite-node scripts/rules-doc.ts
+// severity, standard and fix family. Run: npx vite-node scripts/rules-doc.ts
 import { writeFileSync } from 'node:fs';
 import { analyze, AREA_LABEL, SEVERITY_ORDER, fixKeyForRule, FIX_TITLE, type Finding, type FindingArea } from '../src/engine/index';
 import { ALL_FIXTURES } from '../src/engine/fixtures';
@@ -31,12 +31,11 @@ const L: string[] = [
 for (const area of ORDER) {
   const list = [...seen.values()].filter((f) => f.area === area).sort((a, b) => a.rule.localeCompare(b.rule, 'en', { numeric: true }));
   if (!list.length) continue;
-  L.push(`## ${AREA_LABEL[area]} (${list.length})`, '', '| Rule | Up to | What it finds | Standard | Course | Fix code |', '|---|---|---|---|---|---|');
+  L.push(`## ${AREA_LABEL[area]} (${list.length})`, '', '| Rule | Up to | What it finds | Standard | Fix code |', '|---|---|---|---|---|');
   for (const f of list) {
     const std = [...new Set(f.refs.map((r) => r.standard).filter(Boolean))].join('<br>') || '—';
-    const course = [...new Set(f.refs.map((r) => r.course).filter(Boolean))].join('<br>') || '—';
     const key = fixKeyForRule(f.rule);
-    L.push(`| \`${f.rule}\` | ${f.severity} | ${(GENERIC[f.rule] ?? f.title).replace(/\|/g, '\|')} | ${std} | ${course} | ${key ? FIX_TITLE[key] : '—'} |`);
+    L.push(`| \`${f.rule}\` | ${f.severity} | ${(GENERIC[f.rule] ?? f.title).replace(/\|/g, '\|')} | ${std} | ${key ? FIX_TITLE[key] : '—'} |`);
   }
   L.push('');
 }

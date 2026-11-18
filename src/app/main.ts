@@ -622,12 +622,12 @@ function renderDetail() {
       codeBlock(g, 'gherkin', 'Security test scenario')));
   }
 
-  const refs = f.refs.filter((x) => x.standard || x.course);
+  const refs = f.refs.filter((x) => x.standard);
   if (refs.length) {
-    body.appendChild(el('section', { class: 'detail__block' }, el('h3', {}, 'Where this rule comes from'),
+    body.appendChild(el('section', { class: 'detail__block' }, el('h3', {}, 'Standard it maps to'),
       el('ul', { class: 'refs' }, ...refs.map((x) => el('li', {},
         x.standard ? el('span', { class: 'refs__std' }, x.standard) : null,
-        x.course ? el('span', { class: 'refs__course' }, `APIsec University: ${x.course}`) : null)))));
+        )))));
   }
   append(detailEl, [head, body]);
   detailEl.scrollTop = 0;

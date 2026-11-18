@@ -1,6 +1,6 @@
 // Patchlane engine: the public surface used by the web app, the CLI and the tests.
 export * from './types';
-export { COURSE, API_TOP10, LLM_RISK } from './refs';
+export { API_TOP10, LLM_RISK } from './refs';
 export { parseDocument, parseApi, buildApiModel, parseTools } from './parse';
 export { checkApi, docsScore } from './api-checks';
 export { checkResponse, parseResponse } from './server-checks';
