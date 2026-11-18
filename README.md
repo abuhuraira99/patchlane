@@ -61,7 +61,7 @@ Every finding carries the exact operation, header, claim or tool it came from, t
 ![Five checks](docs/screenshots/03-checks.jpeg)
 ![Agents](docs/screenshots/04-agents.jpeg)
 ![CI](docs/screenshots/05-ci.jpeg)
-![Sources](docs/screenshots/06-sources.jpeg)
+![Every check names its OWASP risk, fix and test](docs/screenshots/06-sources.jpeg)
 ![Questions](docs/screenshots/07-questions.jpeg)
 ![Close and footer](docs/screenshots/08-close.jpeg)
 
