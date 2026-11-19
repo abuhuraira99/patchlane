@@ -14,7 +14,7 @@ Paste an OpenAPI spec, a server response, a JWT or an MCP tool list. Patchlane r
 [![OWASP API Top 10](https://img.shields.io/badge/OWASP%20API%20Top%2010-2023-a08672?labelColor=111111)](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-a08672?labelColor=111111)](LICENSE)
 
-[**Open the check-up**](https://patchlane.pages.dev/app/) · [Sample report](https://patchlane.pages.dev/app/?sample=1) · [Live demo (85 s)](https://patchlane.pages.dev/demo) · [Every rule](https://patchlane.pages.dev/rules/) · [GitHub Action](#github-action) · [CLI](#cli)
+[**Open the check-up**](https://patchlane.pages.dev/app/) · [Sample report](https://patchlane.pages.dev/app/?sample=1) · [Live demo](https://patchlane.pages.dev/demo) · [Every rule](https://patchlane.pages.dev/rules/) · [GitHub Action](#github-action) · [CLI](#cli)
 
 </div>
 
