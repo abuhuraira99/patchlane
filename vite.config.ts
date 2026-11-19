@@ -13,6 +13,7 @@ export default defineConfig({
         rules: resolve(__dirname, 'rules/index.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         terms: resolve(__dirname, 'terms.html'),
+        demo: resolve(__dirname, 'demo.html'),
         notFound: resolve(__dirname, '404.html'),
       },
     },
